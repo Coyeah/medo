@@ -1,8 +1,15 @@
 // Input.js
 
 import React, { Component } from 'react';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 class Input extends Component {
+  static propTypes = {
+    classPrefix: PropTypes.string,
+    addTodoItem: PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
 
@@ -11,7 +18,6 @@ class Input extends Component {
 
     this.state = {
       inputValue: '',
-      textValue: '',
     };
   }
 
@@ -23,21 +29,28 @@ class Input extends Component {
 
   handleKeyDown(e) {
     if (e.keyCode == '13') {
-      const { inputValue } = this.state;
+      let value = e.target.value;
+      
+      if (!value) return false;
+
+      let newTodoItem = {
+        text: value,
+        isDone: false,
+      };
+
       this.setState({
         inputValue: '',
-        textValue: inputValue,
       });
+      this.props.addTodoItem(newTodoItem);
     }
   }
 
   render() {
-    const { inputValue, textValue } = this.state;
-    const placeholder = "What do you want to do?"
+    const { inputValue } = this.state;
+    const placeholder = "What to do..."
     return(
       <div>
         <input type="text" value={inputValue} onChange={this.handleInputChange} onKeyDown={this.handleKeyDown} placeholder={placeholder} />
-        <p>{textValue}</p>
       </div>
     );
   }

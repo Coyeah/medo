@@ -1,0 +1,37 @@
+// style.scss
+
+$class-prefix: "todo";
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+// .todo-title {
+//   font-weight: bold;
+// }
+
+.#{$class-prefix} {
+  &-block {
+    padding: 30px;
+    border: 1px solid #000;
+  }
+
+  &-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 32px;
+  }
+
+  &-list {
+    margin: 10px;
+    padding: 30px;
+    border: 3px solid #eee;
+    border-radius: 10px;
+    list-style: none;
+  }
+
+  &-item {
+    border-left: 5px solid #000;    
+  }
+}

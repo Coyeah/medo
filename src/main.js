@@ -1,7 +1,26 @@
 // main.js
 
-import React from 'react';
-import { render } from 'react-dom';
+import React, { Component, cloneElement } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
-import App from './App';
-render(<App />, document.getElementById('app'));
+import style from './style.scss';
+
+import Todo from './Todo';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return(
+      <div>
+        <p className="todo-title">React - Todo</p>
+        <Todo className="todo-block" />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));
