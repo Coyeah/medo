@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import Input from './Input';
 import List from './List';
+import Operate from './Operate';
 
 class Todo extends Component {
   static propTypes = {
@@ -60,6 +61,34 @@ class Todo extends Component {
     });
   }
 
+  checkTodoAll(isCheckAll) {
+    if (isCheckAll) {
+      this.state.todos.map((todo, index) => {
+        todo.isDone = true;
+      });
+
+      this.setState({
+        todos: this.state.todos,
+      });
+    }
+  }
+
+  checkTodoDel(isCheckDel) {
+    if (isCheckDel) {
+      let newTodos = [];
+
+      this.state.todos.map((todo, index) => {
+        if (!todo.isDone) {
+          newTodos.push(todo);
+        }
+      });
+
+      this.setState({
+        todos: newTodos,
+      });
+    }
+  }
+
   renderTodoInput() {
     const { classPrefix } = this.props;
 
@@ -85,6 +114,19 @@ class Todo extends Component {
     );
   }
 
+  renderOperate() {
+    const { classPrefix } = this.props;
+
+    return(
+      <Operate
+        key="operate"
+        classPrefix={classPrefix}
+        checkTodoAll={this.checkTodoAll.bind(this)}
+        checkTodoDel={this.checkTodoDel.bind(this)}
+      />
+    );
+  }
+
   render() {
     const { className } = this.props;
     const cx = classnames(className, 'ui-todo');
@@ -93,6 +135,7 @@ class Todo extends Component {
       <div className={cx}>
         {this.renderTodoInput()}
         {this.renderListItem()}
+        {this.renderOperate()}
       </div>
     );
   }
