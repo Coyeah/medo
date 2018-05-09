@@ -10,15 +10,42 @@ class List extends Component {
     todos: PropTypes.array,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.handleCheckBox = this.handleCheckBox.bind(this);
+  }
+
+  handleCheckBox(e) {
+    let value = e.target.value;
+    let isDone = e.target.checked;
+
+    let newTodoItem = {
+      text: value,
+      isDone: isDone,
+    }
+
+    this.props.resetTodoItem(newTodoItem);
+  }
+
   getList() {
-    let str = '';
-    this.props.todos.map((todo, index) => {
-      str = str + "<li>" + todo.text + "</li>";
-    })
+    // let str = '';
+    // this.props.todos.map((todo, index) => {
+    //   str = str + "<li>" + todo.text + "</li>";
+    // })
+    // console.log(str);
+    
     return(
       this.props.todos.map((todo, index) => {
+        const { classPrefix } = this.props;
+
+        const cx = classnames({
+          [`${classPrefix}-item`]: true,
+          [`${classPrefix}-done`]: todo.isDone,
+        });
+
         return(
-          <li>{todo.text}</li>
+          <li className={cx} role="todoItem"><input type="checkbox" value={todo.text} checked={todo.isDone} onChange={this.handleCheckBox} />{todo.text}</li>
         );
       })
     );

@@ -32,7 +32,29 @@ class Todo extends Component {
   }
 
   addTodoItem(newTodoItem) {
-    this.state.todos.push(newTodoItem);
+    let isExist = false;
+
+    this.state.todos.map((todo, index) => {
+      if (todo.text == newTodoItem.text) {
+        isExist = true;
+      }
+    });
+
+    if (!isExist) {
+      this.state.todos.push(newTodoItem);
+      this.setState({
+        todos: this.state.todos,
+      });
+    }
+  }
+
+  resetTodoItem(newTodoItem) {
+    this.state.todos.map((todo, index) => {
+      if (todo.text == newTodoItem.text) {
+        todo.isDone = newTodoItem.isDone;
+      }
+    });
+
     this.setState({
       todos: this.state.todos,
     });
@@ -58,6 +80,7 @@ class Todo extends Component {
         key="listItem"
         classPrefix={classPrefix}
         todos={this.state.todos}
+        resetTodoItem={this.resetTodoItem.bind(this)}
       />
     );
   }
