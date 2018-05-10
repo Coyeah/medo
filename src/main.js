@@ -15,7 +15,7 @@ class App extends Component {
 
   render() {
     return(
-      <div>
+      <div className="todo">
         <p className="todo-title">React - Todo</p>
         <Todo className="todo-block" />
       </div>

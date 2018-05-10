@@ -101,12 +101,12 @@ class Todo extends Component {
     );
   }
 
-  renderListItem() {
+  renderList() {
     const { classPrefix } = this.props;
 
     return(
       <List
-        key="listItem"
+        key="list"
         classPrefix={classPrefix}
         todos={this.state.todos}
         resetTodoItem={this.resetTodoItem.bind(this)}
@@ -134,7 +134,7 @@ class Todo extends Component {
     return(
       <div className={cx}>
         {this.renderTodoInput()}
-        {this.renderListItem()}
+        {this.renderList()}
         {this.renderOperate()}
       </div>
     );

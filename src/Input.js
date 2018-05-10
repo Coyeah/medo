@@ -47,10 +47,16 @@ class Input extends Component {
 
   render() {
     const { inputValue } = this.state;
-    const placeholder = "What to do..."
+    const placeholder = "What to do...";
+    const { classPrefix } = this.props;
+
+    const cx = classnames({
+      [`${classPrefix}-input`]: true,
+    });
+
     return(
       <div>
-        <input type="text" value={inputValue} onChange={this.handleInputChange} onKeyDown={this.handleKeyDown} placeholder={placeholder} />
+        <input type="text" className={cx} value={inputValue} onChange={this.handleInputChange} onKeyDown={this.handleKeyDown} placeholder={placeholder} />
       </div>
     );
   }

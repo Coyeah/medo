@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 class Operate extends Component {
   static propsTypes = {
     classPrefix: PropTypes.string,
+    checkTodoAll: PropTypes.func,
+    checkTodoDel: PropTypes.func,
   };
 
   constructor(props) {
@@ -33,7 +35,8 @@ class Operate extends Component {
 
     return(
       <div className={cx} role="listoperate">
-        <button onClick={this.handleClickAll}>全选</button><button onClick={this.handleClickDel}>删除已完成</button>
+        <div onClick={this.handleClickAll}>全选</div>
+        <div onClick={this.handleClickDel}>删除已完成</div>
       </div>
     );
   }
