@@ -56,7 +56,6 @@ class List extends Component {
             <div className={cxText}>{todo.text}</div>
             <div className={cxOperate}>
               <div data-isDone={todo.isDone} data-text={todo.text} onClick={this.handleCheckBox}>{done}</div>
-              <div>详情</div>
             </div>
           </li>
         );

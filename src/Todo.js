@@ -50,14 +50,22 @@ class Todo extends Component {
   }
 
   resetTodoItem(newTodoItem) {
+    let todoList = [];
+    let todoTarget = new Object();
+
     this.state.todos.map((todo, index) => {
       if (todo.text == newTodoItem.text) {
         todo.isDone = newTodoItem.isDone;
+        todoTarget = todo;
+      } else {
+        todoList.push(todo);
       }
     });
 
+    todoList.push(todoTarget);
+
     this.setState({
-      todos: this.state.todos,
+      todos: todoList,
     });
   }
 
