@@ -74,7 +74,7 @@ class Todo extends Component {
   }
 
   checkTodoAll(isCheckAll) {
-    if (isCheckAll) {
+    if (isCheckAll && this.state.todos != null) {
       this.state.todos.map((todo, index) => {
         todo.isDone = true;
       });
@@ -86,7 +86,7 @@ class Todo extends Component {
   }
 
   checkTodoDel(isCheckDel) {
-    if (isCheckDel) {
+    if (isCheckDel && this.state.todos != null) {
       let newTodos = [];
 
       this.state.todos.map((todo, index) => {

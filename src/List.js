@@ -37,11 +37,11 @@ class List extends Component {
 
         const cx = classnames({
           [`${classPrefix}-item`]: true,
-          [`${classPrefix}-done`]: todo.isDone,
         });
 
         const cxText = classnames({
           [`${classPrefix}-item-text`]: true,
+          [`${classPrefix}-done`]: todo.isDone,
         });
 
         const cxOperate = classnames({
@@ -57,7 +57,6 @@ class List extends Component {
           <li className={cx} role="todoItem">
             <div className={cxText}>{todo.text}</div>
             <div className={cxOperate}>
-              <span>{todo.startTime}</span>
               <div data-isDone={todo.isDone} data-text={todo.text} data-startTime={todo.startTime} onClick={this.handleCheckBox}>{done}</div>
             </div>
           </li>
