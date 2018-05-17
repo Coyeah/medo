@@ -16,8 +16,9 @@ class App extends Component {
   render() {
     return(
       <div className="todo">
-        <p className="todo-title">React - Todo</p>
-        <Todo className="todo-block" />
+        <p className="todo-header">React - Todo</p>
+        <Todo className="todo-main" classPrefix="todo-main" />
+        <p className="todo-footer">By Coyeah</p>
       </div>
     );
   }

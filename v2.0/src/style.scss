@@ -7,6 +7,9 @@ $assist-color: #248888;
 
 .#{$class-prefix} {
   background-color: #fff;
+  padding: 30px;
+  margin: 0;
+  border: 1px solid #000;
 
   &-title {
     margin: 0;
@@ -26,10 +29,11 @@ $assist-color: #248888;
     margin: 0;
     padding: 10px;
     height: 30px;
+    line-height: 30px;
     width: 100%;
     font-size: 1rem;
     border: 0px solid #fff;
-    border-left: 3px solid $theme-color;
+    border-bottom: 2px solid $theme-color;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
 
@@ -39,25 +43,23 @@ $assist-color: #248888;
   }
 
   &-list {
-    margin: 0;
-    padding: 10px;
+    margin: 10px;
+    padding: 0;
     padding-left: 0px;
     list-style: none;
-    border-left: 3px solid $theme-color;
+    width: 100%;
   }
 
   &-item {
     display: flex;
     margin: 20px 0;
-    padding: 10px;
+    padding: 2%;
     border-bottom: 1px solid #eee;
-    border-radius: 0 10px 10px 0;
-    font-size: 1rem;
-    transition: box-shadow 0.5s;
-    -webkit-transition: box-shadow 0.5s;
+    width: 96%;
 
     &-text {
       width: 80%;
+      font-size: 1.4rem;
       word-wrap: break-word;
     }
 
@@ -66,21 +68,15 @@ $assist-color: #248888;
       justify-content: space-between;
       width: 20%;
 
-      & span {
-        margin: 0 5%;
-        width: 100%;
-        border-left: 3px solid $theme-color;
-        font-size: 0.5px;
-        text-align: center;
-      }
-
       & div {
         margin: 0 5%;
         width: 100%;
         background-color: #fff;
+        height: 20px;
+        line-height: 20px;
         border: 1px solid $theme-color;
         border-radius: 3px;
-        font-size: 0.5px;
+        font-size: 0.8px;
         text-align: center;
         cursor: pointer;
       }
@@ -88,20 +84,21 @@ $assist-color: #248888;
   }
 
   &-done {
-    background-color: #eee;
+    // background-color: #eee;
+    color: #888;
+    text-decoration: line-through;
   }
 
   &-operate {
     display: flex;
-    // justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
     height: 40px;
     line-height: 40px;
-    border-left: 3px solid $theme-color;
 
     & div {
-      margin: 0 5%;
-      width: 40%;
+      margin-left: 3%;
+      width: 30%;
       background-color: #fff;
       border: 1px solid $theme-color;
       border-radius: 3px;

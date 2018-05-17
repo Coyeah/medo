@@ -1,4 +1,4 @@
-// Todo.js
+// TodoList.js
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
@@ -19,7 +19,7 @@ class Todo extends Component {
   };
 
   static defaultProps = {
-    classPrefix: 'todo',
+    classPrefix: 'todo-main-todolist',
   };
 
   constructor(props) {
@@ -141,13 +141,16 @@ class Todo extends Component {
 
   render() {
     const { className } = this.props;
-    const cx = classnames(className, 'ui-todo');
+    const cx = className;
 
     return(
       <div className={cx}>
-        {this.renderTodoInput()}
-        {this.renderList()}
-        {this.renderOperate()}
+        <div>
+          {this.renderTodoInput()}
+          {this.renderList()}
+          {this.renderOperate()}
+        </div>
+
       </div>
     );
   }
