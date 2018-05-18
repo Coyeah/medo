@@ -13,10 +13,14 @@
 
 ~~初步实现功能，样式好丑，继续更新。~~
 
-## v2.0
+## ~~v2.0~~
 
-迎来2.0时代，撒花~
+~~迎来2.0时代，撒花~~
 
-![v2.0](https://github.com/Coyeah/react-todo/blob/master/v2.0/todo_v2.0.gif)
+## v3.0
+
+添加了todo的日期。
+
+![v3.0](https://github.com/Coyeah/react-todo/blob/master/v3.0/todo_v3.0.gif)
 
 
