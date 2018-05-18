@@ -26,6 +26,9 @@ class Todo extends Component {
     super(props);
 
     this.addTodoItem = this.addTodoItem.bind(this);
+    this.resetTodoItem = this.resetTodoItem.bind(this);
+    this.checkTodoAll = this.checkTodoAll.bind(this);
+    this.checkTodoDel = this.checkTodoDel.bind(this);
 
     this.state = {
       todos: [],
@@ -35,17 +38,15 @@ class Todo extends Component {
   addTodoItem(newTodoItem) {
     let isExist = false;
 
-    this.state.todos.map((todo, index) => {
+    this.props.todos.map((todo, index) => {
       if (todo.text == newTodoItem.text) {
         isExist = true;
       }
     });
 
     if (!isExist) {
-      this.state.todos.unshift(newTodoItem);
-      this.setState({
-        todos: this.state.todos,
-      });
+      this.props.todos.unshift(newTodoItem);
+      this.props.updateTodos(this.props.todos)
     }
   }
 
@@ -53,7 +54,7 @@ class Todo extends Component {
     let todoList = [];
     let todoTarget = new Object();
 
-    this.state.todos.map((todo, index) => {
+    this.props.todos.map((todo, index) => {
       if (todo.text == newTodoItem.text) {
         todo.isDone = newTodoItem.isDone;
         todoTarget = todo;
@@ -68,36 +69,32 @@ class Todo extends Component {
       todoList.unshift(todoTarget);
     }
 
-    this.setState({
-      todos: todoList,
-    });
+    this.props.updateTodos(todoList);
   }
 
   checkTodoAll(isCheckAll) {
-    if (isCheckAll && this.state.todos != null) {
-      this.state.todos.map((todo, index) => {
-        todo.isDone = true;
+    if (isCheckAll && this.props.todos != null) {
+      this.props.todos.map((todo, index) => {
+        if (todo.startTime == this.props.onDate) { 
+          todo.isDone = true;
+        }
       });
 
-      this.setState({
-        todos: this.state.todos,
-      });
+      this.props.updateTodos(this.props.todos);
     }
   }
 
   checkTodoDel(isCheckDel) {
-    if (isCheckDel && this.state.todos != null) {
+    if (isCheckDel && this.props.todos != null) {
       let newTodos = [];
 
-      this.state.todos.map((todo, index) => {
-        if (!todo.isDone) {
+      this.props.todos.map((todo, index) => {
+        if (!todo.isDone || todo.startTime != this.props.onDate) {
           newTodos.push(todo);
         }
       });
-
-      this.setState({
-        todos: newTodos,
-      });
+      
+      this.props.updateTodos(newTodos);
     }
   }
 
@@ -109,6 +106,7 @@ class Todo extends Component {
         key="todoInput"
         classPrefix={classPrefix}
         addTodoItem={this.addTodoItem.bind(this)}
+        onDate={this.props.onDate}
       />
     );
   }
@@ -120,8 +118,9 @@ class Todo extends Component {
       <List
         key="list"
         classPrefix={classPrefix}
-        todos={this.state.todos}
+        todos={this.props.todos}
         resetTodoItem={this.resetTodoItem.bind(this)}
+        onDate={this.props.onDate}
       />
     );
   }

@@ -31,15 +31,12 @@ class Input extends Component {
     if (e.keyCode == '13') {
       let value = e.target.value;
       
-      let date = new Date();
-      let startTime = date.toLocaleDateString()
-
       if (!value) return false;
 
       let newTodoItem = {
         text: value,
         isDone: false,
-        startTime: startTime,
+        startTime: this.props.onDate,
       };
 
       this.setState({

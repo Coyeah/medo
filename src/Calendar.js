@@ -47,7 +47,7 @@ class Calendar extends Component {
       for (let i = 0; i < 7; i++) {
         let tmpDay = this_day + i;
         let tmpYear = (this_year % 4) ? commYear : leapYear;
-        let tmpWeek = (this_weekDay + i > 6) ? (this_weekDay + i - 6) : (this_weekDay + i);
+        let tmpWeek = (this_weekDay + i > 6) ? (this_weekDay + i - 7) : (this_weekDay + i);
 
         let weekDay = weekName[tmpWeek];
         let day = tmpDay;
@@ -62,9 +62,20 @@ class Calendar extends Component {
           }
         }
 
+        let dateStr = year + "/" + (month + 1) + "/" + day;
+
+        let number = 0;
+
+        this.props.todos.map((todo, index) => {
+          if (todo.startTime == dateStr) {
+            number++;
+          }
+        })
+
         let item = {
           weekDay: weekDay,
-          date: year + "/" + (month + 1) + "/" + day,
+          date: dateStr,
+          number: number,
         }
 
         arr.push(item);
@@ -73,7 +84,7 @@ class Calendar extends Component {
       for (let i = 1; i <= 3; i++) {
         let tmpDay = this_day - i;
         let tmpYear = (this_year % 4) ? commYear : leapYear;
-        let tmpWeek = (this_weekDay - i < 0) ? (this_weekDay - i + 6) : (this_weekDay - i);
+        let tmpWeek = (this_weekDay - i < 0) ? (this_weekDay - i + 7) : (this_weekDay - i);
 
         let weekDay = weekName[tmpWeek];
         let day = tmpDay;
@@ -88,9 +99,20 @@ class Calendar extends Component {
           day = tmpDay + tmpYear[month];
         }
 
+        let dateStr = year + "/" + (month + 1) + "/" + day;
+
+        let number = 0;
+
+        this.props.todos.map((todo, index) => {
+          if (todo.startTime == dateStr) {
+            number++;
+          }
+        })
+
         let item = {
           weekDay: weekDay,
-          date: year + "/" + (month + 1) + "/" + day,
+          date: dateStr,
+          number: number,
         }
 
         arr.unshift(item);
@@ -112,7 +134,7 @@ class Calendar extends Component {
 
 
         return(
-          <li className={cx} onClick={this.handleOnClick} data-date={value.date} >{value.weekDay} - {value.date}</li>
+          <li className={cx} onClick={this.handleOnClick} data-date={value.date} >{value.weekDay} - {value.date} - {value.number}</li>
         );
       })
     );

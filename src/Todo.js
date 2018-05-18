@@ -25,17 +25,25 @@ class Todo extends Component {
     super(props);
 
     this.resetOnDate = this.resetOnDate.bind(this);
+    this.updateTodos = this.updateTodos.bind(this);
 
     let date = new Date();
 
     this.state = {
       onDate: date.toLocaleDateString(),
+      todos: [],
     };
   }
 
   resetOnDate(newDate) {
     this.setState({
       onDate: newDate,
+    });
+  }
+
+  updateTodos(newTodos) {
+    this.setState({
+      todos: newTodos,
     });
   }
 
@@ -53,12 +61,19 @@ class Todo extends Component {
 
     return(
       <div className={cx}>
-        <TodoList className={cxTodoList} classPrefix={cxTodoList} onDate={onDate} />
+        <TodoList 
+          className={cxTodoList} 
+          classPrefix={cxTodoList} 
+          onDate={onDate} 
+          todos={this.state.todos}
+          updateTodos={this.updateTodos.bind(this)}
+        />
         <Calendar 
           className={cxCalendar} 
           classPrefix={cxCalendar} 
           onDate={onDate}
           resetOnDate={this.resetOnDate.bind(this)} 
+          todos={this.state.todos}
         />
       </div>
     );
