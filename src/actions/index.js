@@ -14,3 +14,15 @@ export const doneTodo = todoItemText => {
     todoItemText
   }
 }
+
+export const delDone = () => {
+  return {
+    type: "DEL_DONE",
+  }
+}
+
+export const doneAll = () => {
+  return {
+    type: "DONE_ALL",
+  }
+}

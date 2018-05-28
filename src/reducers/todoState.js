@@ -10,8 +10,10 @@ const todoState = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_ITEN": {
       let todos = state.todos;
+      let todoId = state.todoId + 1;
       todos = todos.filter((value, index) => {
         if(value.text == action.newTodoItem.text) {
+          if (!value.isDone) todoId = todoId - 1;
           return false;
         } else {
           return true;
@@ -19,7 +21,7 @@ const todoState = (state = initialState, action) => {
       })
       todos.unshift(action.newTodoItem);
       return {
-        todoId: state.todoId + 1,
+        todoId: todoId,
         todos: todos,
       }
     }
@@ -32,6 +34,32 @@ const todoState = (state = initialState, action) => {
       })
       return {
         ...state,
+        todoId: state.todoId - 1,
+        todos: todos,
+      }
+    }
+    case "DEL_DONE": {
+      let todos = state.todos;
+      todos = todos.filter((value, index) => {
+        if (value.isDone) {
+          return false;
+        } else {
+          return true;
+        }
+      })      
+      return {
+        ...state,
+        todos: todos,
+      }
+    }
+    case "DONE_ALL": {
+      let todos = state.todos;
+      todos.map((value, index) => {
+        value.isDone = !value.isDone;
+      })
+      return {
+        ...state,
+        todoId: 0,
         todos: todos,
       }
     }
