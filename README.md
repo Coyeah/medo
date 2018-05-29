@@ -17,10 +17,16 @@
 
 ~~迎来2.0时代，撒花~~
 
-## v3.0
+## ~~v3.0~~
 
-添加了todo的日期。
+~~添加了todo的日期。~~
 
-![v3.0](https://github.com/Coyeah/react-todo/blob/master/v3.0/todo_v3.0.gif)
+## v4.0
+
+删除了日期选择
+
+使用Redux + React完成
+
+![v4.0](https://github.com/Coyeah/react-todo/blob/master/v4.0/todo_v4.0.gif)
 
 
