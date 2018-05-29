@@ -21,9 +21,7 @@ class ListItem extends Component {
   }
 
   onClickItem(e) {
-    if (e.target.getAttribute('data-isDone') == "false") {
-      this.props.doneTodo(e.target.innerHTML);
-    }
+    this.props.doneTodo(e.target.innerHTML);
   }
 
   getList() {

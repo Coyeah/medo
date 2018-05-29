@@ -10,7 +10,7 @@ export const addTodo = newTodoItem => {
 
 export const doneTodo = todoItemText => {
   return {
-    type: "DONE_ITEN",
+    type: "TOGGLE_ITEN",
     todoItemText
   }
 }

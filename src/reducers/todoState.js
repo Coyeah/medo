@@ -25,16 +25,22 @@ const todoState = (state = initialState, action) => {
         todos: todos,
       }
     }
-    case "DONE_ITEN": {
+    case "TOGGLE_ITEN": {
       let todos = state.todos;
+      let todoId = state.todoId;
       todos.map((value, index) => {
         if (value.text == action.todoItemText) {
+          if (value.isDone) {
+            todoId++;
+          } else {
+            todoId--;
+          }
           value.isDone = !value.isDone;
         } 
       })
       return {
         ...state,
-        todoId: state.todoId - 1,
+        todoId: todoId,
         todos: todos,
       }
     }
@@ -55,7 +61,7 @@ const todoState = (state = initialState, action) => {
     case "DONE_ALL": {
       let todos = state.todos;
       todos.map((value, index) => {
-        value.isDone = !value.isDone;
+        value.isDone = true;
       })
       return {
         ...state,

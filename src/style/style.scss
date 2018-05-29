@@ -40,4 +40,22 @@ $assist-color: #248888;
       color: #888;
     }
   }
+
+  &-operate {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 2%;
+    box-sizing: border-box;
+
+    &-btn {
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    &-disable {
+      color: #888;
+      cursor: default;
+    }
+  }
 }
