@@ -1,6 +1,7 @@
 // webpack.config.js
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: __dirname + '/src/index.js',
@@ -11,7 +12,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './',  // 本地服务器所加载的页面所在的目录
+    contentBase: './index.html',  // 本地服务器所加载的页面所在的目录
     historyApiFallback: true,  // 不跳转
     inline: true,  // 实时刷新
     hot: true
@@ -45,6 +46,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
     new webpack.BannerPlugin('版权所有，翻版必究'),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()

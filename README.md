@@ -29,4 +29,13 @@
 
 ![v4.0](https://github.com/Coyeah/react-todo/blob/master/v4.0/todo_v4.0.gif)
 
+---
+
+文件说明：
+
+* utils - 通用模块
+* components - 展示组件
+* containers - 容器组件
+* reducers - 同步数据处理器
+* sagas - 异步数据处理器
 
