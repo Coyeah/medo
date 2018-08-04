@@ -12,7 +12,8 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './index.html',  // 本地服务器所加载的页面所在的目录
+    contentBase: path.resolve(__dirname, 'dist'),  // 本地服务器所加载的页面所在的目录
+    publicPath: '/',
     historyApiFallback: true,  // 不跳转
     inline: true,  // 实时刷新
     hot: true
@@ -22,7 +23,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        // query: {
+        //   presets: ['env', 'react'],
+        //   plugins: ['react-hot-loader/babel']
+        // }
       },{
         test: /\.css$/,
         loader: 'style-loader!css-loader'
@@ -47,7 +52,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './dist/index.html',
+			filename: 'index.html'
     }),
     new webpack.BannerPlugin('版权所有，翻版必究'),
     new webpack.NamedModulesPlugin(),
