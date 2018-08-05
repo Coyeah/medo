@@ -4,7 +4,6 @@ $theme-color: #5b7778;
   margin: 5px 0;
   padding: 5px;
   width: 100%;
-  border: 1px solid $theme-color;
   box-sizing: border-box;
 
   & .title, .list {
@@ -16,11 +15,13 @@ $theme-color: #5b7778;
 
     & li {
       display: flex;
-      padding: 5px 0;
+      padding: 10px 0;
       width: 100%;
+      border-bottom: 1px solid #eee;
 
       &>div {
-
+        text-align: center;
+        word-break: break-all;
       }
 
       &>div:nth-child(1) {
@@ -33,8 +34,14 @@ $theme-color: #5b7778;
 
       &>div:nth-child(3) {
         width: 30%;
+        display: flex;
+        justify-content: center;
       }
     }
+  }
+
+  & .title {
+    font-weight: bold;
   }
 }
 

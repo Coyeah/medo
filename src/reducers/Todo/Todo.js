@@ -13,6 +13,11 @@ const todo = (state = initialState, action) => {
     case "TOGGLE_ITEN": {
       return state;
     }
+    case 'DEL_TODO': {
+      return {
+        ...state,
+      };
+    }
     case "DEL_DONE": {
       return state;
     }

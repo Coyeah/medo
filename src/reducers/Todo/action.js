@@ -6,10 +6,17 @@ export const addTodo = newTodoItem => {
   }
 }
 
-export const doneTodo = todoItemText => {
+export const doneTodo = todoItem => {
   return {
     type: "TOGGLE_ITEN",
-    payload: todoItemText
+    payload: todoItem
+  }
+}
+
+export const delTodo = todoItem => {
+  return {
+    type: 'DEL_TODO',
+    payload: todoItem
   }
 }
 

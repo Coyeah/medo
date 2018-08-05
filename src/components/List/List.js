@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '../Button/Button';
+
 import style from './style.scss';
 
 export default class List extends React.Component {
@@ -14,10 +16,23 @@ export default class List extends React.Component {
         <li><p className={cx}>暂无数据</p></li>
       )
     } else {
+      const { delTodo } = this.props.actions;
       return (
         data.map(value => {
           return (
-            <li><div>{value.content}</div><div>{value.createAt}</div><div><a href="#">DEL</a></div></li>
+            <li onClick={ e => { console.log('li', e.target.value) } }>
+              <div>{value.content}</div>
+              <div>{value.createAt}</div>
+              <div>
+                <Button
+                  onChange={(e) => {
+                    console.log('button', e.target);
+                  }}
+                >
+                  DEL
+                </Button>
+              </div>
+            </li>
           )
         })
       )

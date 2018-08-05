@@ -1,0 +1,14 @@
+$theme-color: #5b7778;
+
+.buttonModule {
+  border: 2px dashed $theme-color;
+  border-radius: 5px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.buttonModule:hover {
+  border: 2px solid $theme-color;
+  background-color: $theme-color;
+  color: #fff;
+}

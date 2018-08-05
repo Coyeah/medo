@@ -19,10 +19,11 @@ export default class Input extends React.Component {
   handleKeyDown = e => {
     if (e.keyCode == '13') {
 
-      const createAt = new Date().toLocaleString();
+      const time = new Date();
       const newAddItem = {
+        key: time.getTime(),
         content: this.state.inputValue,
-        createAt,
+        createAt: time.toLocaleString(),
       }
       this.props.actions.addTodo(newAddItem);
 

@@ -13,15 +13,13 @@ class Todo extends React.Component {
 
   render() {
     const { list } = this.props.todo;
+    const { actions } = this.props;
     const placeholder = 'What to do...';
-    const actions = {
-      addTodo: this.props.actions.addTodo,
-    }
 
     return (
       <div>
         <Input placeholder={placeholder} actions={actions}  />
-        <List data={list} />
+        <List data={list} actions={actions} />
       </div>
     )
   }
