@@ -24,10 +24,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        // query: {
-        //   presets: ['env', 'react'],
-        //   plugins: ['react-hot-loader/babel']
-        // }
       },{
         test: /\.css$/,
         loader: 'style-loader!css-loader'

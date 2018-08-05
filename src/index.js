@@ -1,13 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
-import HelloWorld from './components/HelloWord/HelloWorld';
+import rootReducer from './reducers/';
+import Router from './common/router';
 
-// if (module.hot) {
-//   module.hot.accept(() => {
-//     render(<HelloWorld />, document.getElementById('root'));
-//   })
-// }
+const middleware = [thunk, logger];
+const store = createStore(rootReducer, applyMiddleware(...middleware));
 
-render(<HelloWorld />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <Router />
+  </Provider>
+, document.getElementById('root'));
