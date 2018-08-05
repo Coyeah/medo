@@ -53,7 +53,7 @@ module.exports = {
     }),
     new webpack.BannerPlugin('版权所有，翻版必究'),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    // new webpack.HotModuleReplacementPlugin()
   ],
   // externals: {
   //   'react': 'window.React'

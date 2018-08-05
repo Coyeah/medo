@@ -1,0 +1,45 @@
+$theme-color: #5b7778;
+
+.listModule {
+  margin: 5px 0;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid $theme-color;
+  box-sizing: border-box;
+
+  & .title, .list {
+    margin: 0;
+    padding: 0 5px;
+    list-style: none;
+    width: 100%;
+    box-sizing: border-box;
+
+    & li {
+      display: flex;
+      padding: 5px 0;
+      width: 100%;
+
+      &>div {
+
+      }
+
+      &>div:nth-child(1) {
+        width: 40%;
+      }
+
+      &>div:nth-child(2) {
+        width: 30%;
+      }
+
+      &>div:nth-child(3) {
+        width: 30%;
+      }
+    }
+  }
+}
+
+.emptyList {
+  text-align: center;
+  color: #888;
+  width: 100%;
+}

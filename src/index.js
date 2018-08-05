@@ -11,6 +11,8 @@ import Router from './common/router';
 const middleware = [thunk, logger];
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 
+// console.log(store.getState());
+
 render(
   <Provider store={store}>
     <Router />

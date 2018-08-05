@@ -2,14 +2,14 @@
 export const addTodo = newTodoItem => {
   return {
     type: "ADD_ITEN",
-    newTodoItem
+    payload: newTodoItem
   }
 }
 
 export const doneTodo = todoItemText => {
   return {
     type: "TOGGLE_ITEN",
-    todoItemText
+    payload: todoItemText
   }
 }
 

@@ -5,7 +5,10 @@ const initialState = {
 const todo = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_ITEN": {
-      return state;
+      return {
+        ...state,
+        list: [...state.list, action.payload],
+      };
     }
     case "TOGGLE_ITEN": {
       return state;

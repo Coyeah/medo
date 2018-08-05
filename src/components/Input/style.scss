@@ -1,0 +1,14 @@
+$theme-color: #5b7778;
+
+.inputModule {
+    outline: none;
+    margin: 0;
+    padding: 10px;
+    line-height: 30px;
+    width: 100%;
+    word-break: break-all;
+    font-size: 1rem;
+    border: 0px solid #fff;
+    border-bottom: 2px solid $theme-color;
+    box-sizing: border-box;
+}
