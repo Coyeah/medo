@@ -1,41 +1,45 @@
+# 医疗大数据应用系统
 
-# React - todo
+**[ Pending ]**
 
-[持续更新]
+关于医疗大数据的应用项目。数据来源于正规网站通过js爬虫获取。
 
-自娱自乐的TodoList，想着提高下自己的学习效率写的东西。
+# 项目总结
 
-也是练手React的Demo。
+该项目框架使用webpack、react、redux、react-router、redux-saga。样式采用antd、bizcharts。数据采用mockjs。
 
-线上效果：[Coyeah's Blog - playroom/react-todo](http://www.coyeah.top/2018/05/13/playRoom-React-todo/)
+因为之前在了解了antd-pro的项目结构，这次尝试整体的结构是模仿antd-pro，实现了工程化开发。整体项目没有使用Dva，因为想刻意练习redux，一次自我的实践，降级的antd-pro。
 
-## ~~v1.0~~
+接下来的任务需要解决在框架使用上的问题，并且侧重于前端开发的性能问题。
 
-~~初步实现功能，样式好丑，继续更新。~~
+## 存在问题
 
-## ~~v2.0~~
+### 功能：
 
-~~迎来2.0时代，撒花~~
+* 前端权限功能未实现
+* 部分情况的路由跳转未实现
+* webpack配置打包速度慢，配置臃肿
+* 网络加载和缓存臃肿
 
-## ~~v3.0~~
+### 页面：
 
-~~添加了todo的日期。~~
+* 页面效果传统
+* 未实现富交互功能
 
-## v4.0
+# 页面效果
 
-删除了日期选择
+## 主页
 
-使用Redux + React完成
+![homepage](https://github.com/Coyeah/medicalBigData/blob/master/resource/homepage.png)
 
-![v4.0](https://github.com/Coyeah/react-todo/blob/master/v4.0/todo_v4.0.gif)
+## 功能页面
 
----
+![analyze_1](https://github.com/Coyeah/medicalBigData/blob/master/resource/analyze_1.png)
 
-文件说明：
+![analyze_2](https://github.com/Coyeah/medicalBigData/blob/master/resource/analyze_2.png)
 
-* utils - 通用模块
-* components - 展示组件
-* containers - 容器组件
-* reducers - 同步数据处理器
-* sagas - 异步数据处理器
+![ingredients_1](https://github.com/Coyeah/medicalBigData/blob/master/resource/ingredients_1.png)
 
+![ingredients_2](https://github.com/Coyeah/medicalBigData/blob/master/resource/ingredients_2.png)
+
+![ingredients_3](https://github.com/Coyeah/medicalBigData/blob/master/resource/ingredients_3.png)
