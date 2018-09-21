@@ -19,7 +19,7 @@ class TaskForm extends React.Component {
       if (!err) {
         // console.log('Received values of form: ', values);
 
-        let deadline, createTime;
+        let deadline, createTime, id;
         {
           let date = new Date(values.deadline);
           deadline = `${date.getFullYear()}-${parseInt(date.getMonth()) + 1}-${date.getDate()}`;
@@ -27,12 +27,15 @@ class TaskForm extends React.Component {
         {
           let date = new Date();
           createTime = `${date.getFullYear()}-${parseInt(date.getMonth()) + 1}-${date.getDate()}`;
+          id = date.getTime();
         }
 
         this.props.addTask({
           ...values,
           createTime,
           deadline,
+          id,
+          status: 0,
         });
         this.props.form.resetFields();
         this.props.closeModal();

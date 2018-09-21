@@ -17,7 +17,7 @@ class BasicLayout extends React.Component {
 
   render() {
     return (
-      <Content style={{ padding: '0 50px' }}>
+      <Content className={'contentLayout'}>
         {this.props.children}
       </Content>
     )

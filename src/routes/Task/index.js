@@ -1,13 +1,18 @@
 import React, { Fragment } from 'react';
 import {
   Button,
+  Icon,
 } from 'antd';
 import { connect } from 'react-redux';
 
 import { ADD_NEW_TASK } from '../../reducers/task';
+import { DONE_TASK } from '../../reducers/task';
+import { DEL_OLD_TASK } from '../../reducers/task';
+import { RESET_TASK } from '../../reducers/task';
+
 import './index.less';
 import InputModal from './InputModal';
-import Card from '../../components/Card';
+import Card from './Card';
 
 class Task extends React.Component {
   addTask = (item) => {
@@ -19,6 +24,33 @@ class Task extends React.Component {
     })
   }
 
+  doneTask = (id) => {
+    this.props.dispatch({
+      type: DONE_TASK,
+      payload: {
+        id,
+      }
+    })
+  }
+
+  delTask = (id) => {
+    this.props.dispatch({
+      type: DEL_OLD_TASK,
+      payload: {
+        id,
+      }
+    })
+  }
+
+  resetTask = (id) => {
+    this.props.dispatch({
+      type: RESET_TASK,
+      payload: {
+        id,
+      }
+    })
+  }
+
   taskListRender = () => {
     const { taskList } = this.props.task;
     if (taskList.length) {
@@ -26,9 +58,14 @@ class Task extends React.Component {
         <Fragment>
           {taskList.map((value, index) => {
             return (
-              <Card key={index} width={'25%'} title={value.taskName}>
-                <p>{value.createTime}</p>
-              </Card>
+              <Card
+                key={value.id}
+                info={value}
+                title={value.taskName}
+                handleOK={this.doneTask}
+                handleCancel={this.delTask}
+                handleBack={this.resetTask}
+              />
             )
           })}
         </Fragment>
