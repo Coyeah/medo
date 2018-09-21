@@ -1,14 +1,13 @@
 import React, { Fragment } from 'react';
 import {
   Button,
-  Collapse,
 } from 'antd';
 import { connect } from 'react-redux';
-const Panel = Collapse.Panel;
 
 import { ADD_NEW_TASK } from '../../reducers/task';
 import './index.less';
-import InputModal from '../../components/InputModal';
+import InputModal from './InputModal';
+import Card from '../../components/Card';
 
 class Task extends React.Component {
   addTask = (item) => {
@@ -25,16 +24,13 @@ class Task extends React.Component {
     if (taskList.length) {
       return(
         <Fragment>
-          <Collapse bordered={false}>
-            {taskList.map((value, index) => {
-              return (
-                <Panel header={value.taskName} key={index}>
-                  <p>{value.detial}</p>
-                  <p>{new Date(value.deadline.toString()).getTime()}</p>
-                </Panel>
-              )
-            })}
-          </Collapse>
+          {taskList.map((value, index) => {
+            return (
+              <Card key={index} width={'25%'} title={value.taskName}>
+                <p>{value.createTime}</p>
+              </Card>
+            )
+          })}
         </Fragment>
       )
     } else {

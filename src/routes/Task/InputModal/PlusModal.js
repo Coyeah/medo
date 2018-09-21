@@ -18,7 +18,22 @@ class TaskForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         // console.log('Received values of form: ', values);
-        this.props.addTask(values);
+
+        let deadline, createTime;
+        {
+          let date = new Date(values.deadline);
+          deadline = `${date.getFullYear()}-${parseInt(date.getMonth()) + 1}-${date.getDate()}`;
+        }
+        {
+          let date = new Date();
+          createTime = `${date.getFullYear()}-${parseInt(date.getMonth()) + 1}-${date.getDate()}`;
+        }
+
+        this.props.addTask({
+          ...values,
+          createTime,
+          deadline,
+        });
         this.props.form.resetFields();
         this.props.closeModal();
       }
