@@ -27,7 +27,7 @@ class About extends React.Component {
 
         <p>用到相关的主要技术有：</p>
 
-        <p><code>antd</code>、<code>react-router</code>、<code>webpack</code>、<code>react</code>、<code>less</code>。</p>
+        <p><code>antd</code>、<code>react-router</code>、<code>webpack</code>、<code>react</code>、<code>less</code>、<code>redux</code>。</p>
 
         <p>如有任何问题，欢迎向我提出。乐意解答和一起交流。</p>
 

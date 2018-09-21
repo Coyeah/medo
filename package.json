@@ -1,8 +1,8 @@
 {
   "name": "react-todo",
   "version": "1.0.0",
-  "description": "**[ Pending ]**",
-  "main": "server.js",
+  "description": "TodoList",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist/*",

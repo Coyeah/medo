@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Button,
+  Tooltip,
 } from 'antd';
 
 import './index.less';
@@ -26,27 +27,30 @@ export default class Card extends React.Component {
     e.stopPropagation();
 
     this.props.handleCancel && this.props.handleCancel(this.props.info.id);
+
+    this.handleVisible();
   }
 
   handleReset = (e) => {
     e.stopPropagation();
 
     this.props.handleBack && this.props.handleBack(this.props.info.id);
+
+    this.handleVisible();
   }
 
   titleRender = () => {
-    if (this.props.title) {
       let style = {};
       if (this.props.info.status === 1) {
         style = {
           textDecoration: 'line-through'
         };
       }
-
-      return <div style={style} className={'title'}>{this.props.title}</div>
-    } else {
-      return null;
-    }
+      if (this.props.toolTip) {
+        return <div style={style} className={'title'}><Tooltip arrowPointAtCenter title={this.props.toolTip}>{this.props.title || ''}</Tooltip></div>
+      } else {
+        return <div style={style} className={'title'}>{this.props.title}</div>
+      }
   }
 
   operationRender = () => {

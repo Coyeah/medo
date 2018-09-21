@@ -3,7 +3,7 @@ import Loading from '../components/Loading';
 
 const getRouterData = {
   '/home': {
-    component: dynamicWrapper(() => import('../components/Loading/'))
+    component: dynamicWrapper(() => import('../components/Home/'))
   },
   '/list': {
     component: dynamicWrapper(() => import('../routes/Task/'))

@@ -62,6 +62,7 @@ class Task extends React.Component {
                 key={value.id}
                 info={value}
                 title={value.taskName}
+                toolTip={`最后期限：${value.deadline}`}
                 handleOK={this.doneTask}
                 handleCancel={this.delTask}
                 handleBack={this.resetTask}
