@@ -9,13 +9,21 @@
 如有任何问题，欢迎向我提出。乐意解答和一起交流。
 
 [issues](https://github.com/Coyeah/react-todo/issues)
+
 [Coyeah_chen@outlook.com](mailto:coyeah_chen@outlook.com)
 
 ## 项目开启与效果
 
 ```JavaScirpt
 npm close git@github.com:Coyeah/react-todo.git
+
 npm i
+
 npm start
 ```
+
 ![效果演示](https://github.com/Coyeah/react-todo/blob/master/resource/index.gif)
+
+## 版本说明
+
+* \# v1.0.0 - 基于 `redux` 的基础 ToDo List 实现基础代码框架。

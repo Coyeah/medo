@@ -6,7 +6,10 @@ export default class Home extends React.Component {
   render () {
     return (
       <div className={'homeLayout'}>
-        <p>一个简单的 ToDo List</p>
+        <p className={'title'}>一个简单的 ToDo List</p>
+        <ul style={{ listStyle: 'none' }}>
+          <li className={'list'}>v1.0.0 - 基于 <code>redux</code> 的基础 ToDo List 实现基础代码框架。</li>
+        </ul>
       </div>
     )
   }
