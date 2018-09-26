@@ -10,6 +10,7 @@ export default class Home extends React.Component {
         <ul style={{ listStyle: 'none' }}>
           <li className={'list'}>v1.0.0 - 基于 <code>redux</code> 的基础 ToDo List 实现基础代码框架。</li>
           <li className={'list'}>v1.0.1 - 实现路由跳转修正，List 样式修改。</li>
+          <li className={'list'}>v1.1.0 - 新增 <code>FoldCard</code> 展示组件。</li>
         </ul>
       </div>
     )

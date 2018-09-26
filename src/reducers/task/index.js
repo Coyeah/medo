@@ -1,5 +1,6 @@
 export const ADD_NEW_TASK = 'ADD_NEW_TASK';
 export const DONE_TASK = 'DONE_TASK';
+export const CANCAL_TASK = 'CANCAL_TASK';
 export const DEL_OLD_TASK = 'DEL_OLD_TASK';
 export const RESET_TASK = 'RESET_TASK';
 
@@ -8,7 +9,7 @@ const initialState = {
   taskList: [],
 }
 
-const list = (state = initialState, action) => {
+const task = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_TASK: {
       let { item } = action.payload;
@@ -35,7 +36,7 @@ const list = (state = initialState, action) => {
       }
       break;
     }
-    case DEL_OLD_TASK: {
+    case CANCAL_TASK: {
       let { id } = action.payload;
       let taskList = state.taskList;
       taskList.forEach(value => {
@@ -43,6 +44,19 @@ const list = (state = initialState, action) => {
           value.status = 2;
         }
       });
+      return {
+        ...state,
+        taskList,
+      }
+      break;
+    }
+    case DEL_OLD_TASK: {
+      let { id } = action.payload;
+      let taskList = state.taskList;
+      let target = taskList.findIndex(value => {
+        return value.id == id;
+      })
+      taskList.splice(target, 1);
       return {
         ...state,
         taskList,
@@ -71,4 +85,4 @@ const list = (state = initialState, action) => {
   }
 }
 
-export default list;
+export default task;
