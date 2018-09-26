@@ -1,15 +1,14 @@
 import React, { Fragment } from 'react';
-import { HashRouter, Route, IndexRoute } from 'react-router-dom';
+import { HashRouter, Route, IndexRoute, Redirect } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 
-import BlankLayout from './layouts/BlankLayout';
+import SiderMenu from './layouts/SiderMenu';
 import BasicLayout from './layouts/BasicLayout';
+import GlobalFooter from './components/GlobalFooter';
 
 import { getRouterData, getRouterSet } from './common/router';
 
 import './index.less';
-
-const { Header, Content, Footer } = Layout;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,13 +25,14 @@ export default class App extends React.Component {
     return (
       <HashRouter basename='/'>
         <Layout className={"layout"}>
-          <BlankLayout />
+          <SiderMenu />
           <BasicLayout>
+            <Route exact path="/" render={() => (
+              <Redirect to="/home"/>
+            )}/>
             {this.routeMaker(getRouterData, getRouterSet)}
           </BasicLayout>
-          <Footer style={{ textAlign: 'center' }}>
-            ToDo List ©2018 Created by Coyeah Chen
-          </Footer>
+          <GlobalFooter />
         </Layout>
       </HashRouter>
     );

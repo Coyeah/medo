@@ -15,6 +15,10 @@ class BasicLayout extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    // const { match, location, history } = this.props
+  }
+
   render() {
     return (
       <Content className={'contentLayout'}>

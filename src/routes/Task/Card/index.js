@@ -15,6 +15,12 @@ export default class Card extends React.Component {
     })
   }
 
+  handleVisibleFalse = () => {
+    this.setState({
+      visible: false,
+    })
+  }
+
   handleCheck = (e) => {
     e.stopPropagation();
 
@@ -110,7 +116,7 @@ export default class Card extends React.Component {
 
 
     return (
-      <div style={inStyle} className={'cardLayout'} onClick={this.handleVisible}>
+      <div style={inStyle} className={'cardLayout'} onClick={this.handleVisible} onMouseLeave={this.handleVisibleFalse}>
         {this.titleRender()}
         {this.operationRender()}
       </div>
