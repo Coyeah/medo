@@ -2,16 +2,33 @@ const menuData = [
   {
     name: '主页',
     icon: 'home',
-    path: 'home',
+    path: '/home',
+    role: [],
   }, {
     name: '列表',
     icon: 'bars',
-    path: 'list',
+    path: '/list',
+    role: ['admin'],
   }, {
     name: '关于',
+    icon: 'file-text',
+    path: '/about',
+    role: [],
+  }, {
+    name: '用户',
     icon: 'user',
-    path: 'about',
-  }
+    path: '/user',
+    role: [],
+    children: [
+      {
+        name: '登录',
+        path: '/user/login',
+      }, {
+        name: '注册',
+        path: '/user/register',
+      }
+    ],
+  },
 ];
 
 const menuMap = (data => {
@@ -29,7 +46,15 @@ const menuMap = (data => {
   return obj;
 })(menuData);
 
+const roleMap = (data => {
+  let obj = {};
+  data.map(value => {
+    obj[value.path] = value.role;
+  })
+})(menuData);
+
 export {
   menuData,
   menuMap,
+  roleMap,
 }

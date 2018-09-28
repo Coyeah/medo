@@ -13,8 +13,8 @@ class SiderMenu extends React.Component {
   menuItemRender = () => {
     return menuData.map(value => {
       return (
-        <Menu.Item key={`/${value.path}`}>
-          <Link to={`/${value.path}`}>
+        <Menu.Item key={value.path}>
+          <Link to={value.path}>
             <Icon type={value.icon} />
             <span>{value.name}</span>
           </Link>
@@ -25,9 +25,10 @@ class SiderMenu extends React.Component {
 
   render() {
     const { location } = this.props
+    console.log(location.pathname);
 
     return (
-      <Header>
+      <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
         <div className="logo">ToDo</div>
         <Menu
           theme="dark"

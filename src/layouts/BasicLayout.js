@@ -21,11 +21,11 @@ class BasicLayout extends React.Component {
 
   render() {
     return (
-      <Content className={'contentLayout'}>
+      <Content className={'contentLayout'} style={{ marginTop: 64 }}>
         {this.props.children}
       </Content>
     )
   }
 }
 
-export default withRouter(BasicLayout)
+export default withRouter(BasicLayout);

@@ -11,6 +11,21 @@ const getRouterData = {
   '/about': {
     component: dynamicWrapper(() => import('../components/About/'))
   },
+  '/user/login': {
+    component: dynamicWrapper(() => import('../components/Loading/'))
+  },
+  '/user/register': {
+    component: dynamicWrapper(() => import('../components/Loading/'))
+  },
+  '/403': {
+    component: dynamicWrapper(() => import('../routes/Exception/403.js'))
+  },
+  '/404': {
+    component: dynamicWrapper(() => import('../routes/Exception/404.js'))
+  },
+  '/500': {
+    component: dynamicWrapper(() => import('../routes/Exception/500.js'))
+  },
 };
 
 function dynamicWrapper (fn) {
