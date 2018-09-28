@@ -6,7 +6,7 @@ import {
 const { Comntent } = Layout;
 import { withRouter } from 'react-router-dom';
 
-import { menuMap } from '../common/menu';
+import { menuMap } from '../common/router';
 
 const { Content } = Layout;
 

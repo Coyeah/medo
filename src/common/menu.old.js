@@ -31,7 +31,7 @@ const menuData = [
   },
 ];
 
-const menuMap = (data => {
+const locationMap = (data => {
   let obj = {};
   data.map(value => {
     if (value.children) {
@@ -54,7 +54,7 @@ const roleMap = (data => {
 })(menuData);
 
 export {
-  menuData,
+  locationMap,
   menuMap,
   roleMap,
 }

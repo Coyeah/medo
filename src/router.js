@@ -6,7 +6,7 @@ import SiderMenu from './layouts/SiderMenu';
 import BasicLayout from './layouts/BasicLayout';
 import GlobalFooter from './components/GlobalFooter';
 
-import { getRouterData, getRouterSet } from './common/router';
+import { getRouterMap, getRouterSet } from './common/router';
 
 import './index.less';
 
@@ -30,7 +30,7 @@ export default class App extends React.Component {
             <Route exact path="/" render={() => (
               <Redirect to="/home"/>
             )}/>
-            {this.routeMaker(getRouterData, getRouterSet)}
+            {this.routeMaker(getRouterMap, getRouterSet)}
           </BasicLayout>
           <GlobalFooter />
         </Layout>
