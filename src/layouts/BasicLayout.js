@@ -6,8 +6,6 @@ import {
 const { Comntent } = Layout;
 import { withRouter } from 'react-router-dom';
 
-import { menuMap } from '../common/router';
-
 const { Content } = Layout;
 
 class BasicLayout extends React.Component {

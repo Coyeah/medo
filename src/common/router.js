@@ -1,10 +1,10 @@
 import config from './config';
 
-const menuSet = (data => {
+const getMenuSet = (data => {
   return data;
 })(config);
 
-const menuMap = (data => {
+const getMenuMap = (data => {
   let obj = {};
   data.forEach(value => {
     if (value.name) {
@@ -17,14 +17,6 @@ const menuMap = (data => {
         obj[value.path] = value.name;
       }
     }
-  });
-  return obj;
-})(config);
-
-const roleMap = (data => {
-  let obj = {};
-  data.forEach(value => {
-
   });
   return obj;
 })(config);
@@ -47,24 +39,21 @@ const getRouterSet = (data => {
 const getRouterMap = (data => {
   let obj = {};
   data.forEach(value => {
-    if (value.path && value.component || value.children) {
-      if (value.children) {
-        obj[value.path] = { component: value.component }
-        value.children.forEach(value => {
-          obj[value.path] = { component: value.component }
-        })
-      } else {
-        obj[value.path] = { component: value.component }
-      }
+    if (value.children) {
+      obj[value.path] = { role: value.role, component: value.component }
+      value.children.forEach(item => {
+        obj[item.path] = { role: value.role, component: item.component }
+      })
+    } else {
+      obj[value.path] = { role: value.role, component: value.component }
     }
   })
   return obj;
 })(config);
 
 export {
-  menuSet,
-  menuMap,
-  roleMap,
+  getMenuSet,
+  getMenuMap,
   getRouterSet,
   getRouterMap,
 }

@@ -7,11 +7,11 @@ import {
 } from 'antd';
 const { Header } = Layout;
 
-import { menuSet } from '../common/router';
+import { getMenuSet } from '../common/router';
 
 class SiderMenu extends React.Component {
   menuItemRender = () => {
-    return menuSet.map(value => {
+    return getMenuSet.map(value => {
       if (value.path && value.icon && value.name) {
         return (
           <Menu.Item key={value.path}>
@@ -27,7 +27,6 @@ class SiderMenu extends React.Component {
 
   render() {
     const { location } = this.props
-    console.log(location.pathname);
 
     return (
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>

@@ -24,6 +24,7 @@ const config = [
     name: '用户',
     icon: 'user',
     path: '/user',
+    component: dynamicWrapper(() => import('../components/Loading/')),
     role: [],
     children: [
       {
