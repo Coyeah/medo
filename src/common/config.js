@@ -9,7 +9,7 @@ const config = [
     component: dynamicWrapper(() => import('../components/Home/')),
     role: [],
   }, {
-    name: '列表',
+    name: '任务',
     icon: 'bars',
     path: '/list',
     component: dynamicWrapper(() => import('../routes/Task/')),
@@ -24,17 +24,17 @@ const config = [
     name: '用户',
     icon: 'user',
     path: '/user',
-    component: dynamicWrapper(() => import('../components/Loading/')),
-    role: [],
+    component: dynamicWrapper(() => import('../routes/User/')),
+    role: ['common'],
     children: [
       {
         name: '登录',
         path: '/user/login',
-        component: dynamicWrapper(() => import('../components/Loading/')),
+        component: dynamicWrapper(() => import('../routes/User/Login')),
       }, {
         name: '注册',
         path: '/user/register',
-        component: dynamicWrapper(() => import('../components/Loading/')),
+        component: dynamicWrapper(() => import('../routes/User/Register')),
       }
     ],
   }, {

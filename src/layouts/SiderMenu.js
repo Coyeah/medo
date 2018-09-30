@@ -30,7 +30,7 @@ class SiderMenu extends React.Component {
 
     return (
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-        <div className="logo">ToDo</div>
+        <Link to="/"><div className="logo">ToDo</div></Link>
         <Menu
           theme="dark"
           mode="horizontal"

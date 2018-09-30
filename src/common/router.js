@@ -21,26 +21,11 @@ const getMenuMap = (data => {
   return obj;
 })(config);
 
-const getRouterSet = (data => {
-  let arr = [];
-  data.forEach(value => {
-    if (value.children) {
-      arr.push(value.path);
-      value.children.forEach(value => {
-        arr.push(value.path);
-      })
-    } else {
-      arr.push(value.path);
-    }
-  })
-  return arr;
-})(config);
-
 const getRouterMap = (data => {
   let obj = {};
   data.forEach(value => {
     if (value.children) {
-      obj[value.path] = { role: value.role, component: value.component }
+      obj[value.path] = { role: value.role[0] === 'common' ? [] : value.role, component: value.component }
       value.children.forEach(item => {
         obj[item.path] = { role: value.role, component: item.component }
       })
@@ -54,6 +39,5 @@ const getRouterMap = (data => {
 export {
   getMenuSet,
   getMenuMap,
-  getRouterSet,
   getRouterMap,
 }

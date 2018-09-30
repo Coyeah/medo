@@ -8,14 +8,19 @@ import GlobalFooter from './components/GlobalFooter';
 import Authorized from './components/Authorized';
 
 import { getRouterMap, getRouterSet } from './common/router';
-import { getAuthority } from './utils/authority';
+import { setAuthority, getAuthority } from './utils/authority';
 
 import './index.less';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    setAuthority([]);
   }
+
+  // componentWillUnmount() {
+  //   setAuthority([]);
+  // }
 
   routeMaker = (obj, arr) => {
     return arr.map((value, index) => {
@@ -23,29 +28,13 @@ export default class App extends React.Component {
     })
   }
 
-  // render() {
-  //   return (
-  //     <HashRouter basename='/'>
-  //       <Layout className={"layout"}>
-  //         <SiderMenu />
-  //         <BasicLayout>
-  //           <Route exact path="/" render={() => (
-  //             <Redirect to="/home"/>
-  //           )}/>
-  //           {this.routeMaker(getRouterMap, getRouterSet)}
-  //         </BasicLayout>
-  //         <GlobalFooter />
-  //       </Layout>
-  //     </HashRouter>
-  //   );
-  // }
   render() {
     return (
       <HashRouter basename='/'>
         <Layout className={"layout"}>
           <SiderMenu />
           <BasicLayout>
-            <Authorized auth={getAuthority} routerMap={getRouterMap} />
+            <Authorized routerMap={getRouterMap} />
           </BasicLayout>
           <GlobalFooter />
         </Layout>
