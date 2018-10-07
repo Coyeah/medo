@@ -6,17 +6,22 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
+    vendor: ['react', 'react-dom', 'react-router-dom', 'redux'],
     bundle: __dirname + '/src/index.js'
   },
   output: {
-    filename: '[name].[hash5].js',
     path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash:8].js',
+    chunkFilename: '[name].[hash:8].js',
     publicPath: '/'
   },
   resolve: {
-    // 自动解析文件拓展名，补全后缀
-    extensions: ['.js', '.jsx', '.json', '.css', '.less'],
-    alias: {}
+    // 删除不必要的后缀自动补全，少了文件后缀的自动匹配，即减少了文件路径查询的工作
+    // 其他文件可以在编码时指定后缀，如 import('./index.scss')
+    extensions: ['.js', '.jsx', '.json', '.less'],
+    // 避免新增默认文件，编码时使用详细的文件路径，代码会更容易解读，也有益于提高构建速度
+    mainFiles: ['index'],
+    alias: {},
   },
   module: {
     rules: [{
@@ -52,7 +57,7 @@ module.exports = {
       use: [{
         loader: "url-loader",
         query: {
-          limit: 10000,
+          limit: 8192,
           name: "images/[name]-[hash:5].[ext]"
         }
       }, {

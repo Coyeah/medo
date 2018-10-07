@@ -22,4 +22,10 @@ module.exports = merge(common, {
         }
     },
   },
+  plugins: [
+    // 添加了这两个 plugins 后报错：
+    // Uncaught RangeError: Maximum call stack size exceeded
+    // new webpack.NamedModulesPlugin(), // 用于启动 HMR 时可以显示模块的相对路径
+    // new webpack.HotModuleReplacementPlugin(), // Hot Module Replacement 的插件
+  ],
 });
