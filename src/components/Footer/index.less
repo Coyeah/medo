@@ -1,0 +1,47 @@
+@import '../../common/theme.less';
+
+#footer {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  padding-top: 10px;
+  text-align: center;
+
+  .social {
+    font-size: 1.8rem;
+    margin: 10px 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+}
+
+.underline {
+  position: relative;
+  transform: translateZ(0);
+  vertical-align: middle;
+  backface-visibility: hidden;
+  box-shadow: 0 0 1px transparent;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    height: 2px;
+    bottom: 0;
+    left: 51%;
+    right: 51%;
+    background-color: @theme-color;
+    transition-duration: 0.2s;
+    transition-property: right, left;
+    transition-timing-function: ease-out;
+  }
+
+  &:hover:before {
+    left: 0;
+    right: 0;
+  }
+}
