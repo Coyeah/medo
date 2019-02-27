@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {
-  Icon, Popover, Divider,
+  Icon, Divider,
 } from 'antd';
 import styles from './index.less';
 
@@ -18,17 +18,15 @@ export default function (props) {
 
   if (props.new) {
     return (
-      <div className={styles.block}>
+      <div className={styles.block} style={{borderStyle: 'dashed'}} onClick={props.onClick}>
         <Icon type={'plus'} /><Divider type="vertical" />{props.children}
       </div>
     )
   } else {
     return (
-      <Popover placement="topLeft" content={content} trigger="click">
-        <div className={styles.block}>
-          {number[props.index]}<Divider type="vertical" />{props.children}
-        </div>
-      </Popover>
+      <div className={styles.block} onClick={props.onClick}>
+        {number[props.index]}<Divider type="vertical" />{props.children}
+      </div>
     )
   }
 }

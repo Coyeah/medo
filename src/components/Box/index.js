@@ -9,21 +9,22 @@ export default class Box extends React.Component {
   }
 
   render() {
+    const {addItem, onClick} = this.props;
     return (
       <Card bordered={false} style={{minHeight: 450}}>
         {
           this.props.data.map((value, index) => (
-            <Item title={value.name} key={index}>
+            <Item title={value.name} key={index} onClick={() => onClick([index, -1])}>
               {
                 value.children.map((val, ind) => (
-                  <SubItem key={ind}>{val.name}</SubItem>
+                  <SubItem key={ind} index={ind} onClick={() => onClick([index, ind])}>{val.name}</SubItem>
                 ))
               }
-              <SubItem new>添加二级任务</SubItem>
+              <SubItem new onClick={() => addItem(index)}>点击添加步骤</SubItem>
             </Item>
           ))
         }
-        <Item title={'添加一级任务'} new />
+        <Item new title={'点击添加任务'} onClick={() => addItem()} />
       </Card>
     )
   }

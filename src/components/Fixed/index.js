@@ -18,6 +18,7 @@ const InfoContent = () => (
     <p>有着很多很多想做的事情，好奇、幻想、爱折腾。</p>
     <p><b>wubba lubba dub dub</b></p>
     <Divider>关于项目</Divider>
+    <p>2019-02-27更新：用了思维导图的方式来建立Todo List，分层级。更好的细化任务。</p>
     <p>一个在入门 React 的时候练手的项目—— Todo List。再再再一次重写。</p>
     <p>在之前开发的 Todo List 中，为了刻意联系，因此尝试在不断的在项目中加各种，如 redux、antd 等。很赘余，很繁重。也没见的多好看。</p>
     <p>现在，化繁为简。只用简单的模块化和 react，再加些 antd 的样式作佐料。</p>

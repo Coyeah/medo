@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Popover, Divider} from 'antd';
+import {Button, Popover, Divider, Modal} from 'antd';
 import moment from 'moment';
 import styles from './index.less';
 
@@ -16,6 +16,8 @@ class Home extends React.Component {
   state = {
     inputValue: '',
     list: [],
+    visible: false,
+    target: [],
   };
 
   componentDidMount() {
@@ -23,6 +25,74 @@ class Home extends React.Component {
       list: getStorage(),
     });
   };
+
+  onInputChange = (e) => {
+    this.setState({ inputValue: e.target.value });
+  }
+
+  saveList = (list = []) => {
+    if (list instanceof Array) {
+      setStorage(list);
+      this.setState({
+        list,
+        inputValue: '',
+        visible: false,
+        target: [],
+      });
+    }
+  }
+
+  addItem = (index = -1, ind = -1) => {
+    const {list} = this.state;
+    if (index >= 0) {
+      list[index].children.push({
+        name: '',
+        createTime: moment(),
+      })
+    } else {
+      list.push({
+        name: '',
+        children: [],
+        createTime: moment(),
+      })
+    }
+    this.saveList(list);
+  }
+
+  changeItem = () => {
+    const {list, inputValue, target} = this.state;
+    if (target[1] < 0) {
+      list[target[0]].name = inputValue;
+    } else {
+      list[target[0]].children[target[1]].name = inputValue;
+    }
+    this.saveList(list);
+  }
+
+  delItem = () => {
+    const {list, target} = this.state;
+    if (target[1] < 0) {
+      list.splice(target[0], 1);
+    } else {
+      list[target[0]].children.splice(target[1], 1);
+    }
+    this.saveList(list);
+  }
+
+  onItemClick = (target) => {
+    const {list} = this.state;
+    let inputValue = '';
+    if (target[1] < 0) {
+      inputValue = list[target[0]].name;
+    } else {
+      inputValue = list[target[0]].children[target[1]].name;
+    }
+    this.setState({
+      visible: true,
+      target,
+      inputValue,
+    })
+  }
 
   renderOption = () => {
     const FuncContent = (
@@ -42,13 +112,38 @@ class Home extends React.Component {
     )
   }
 
+  renderInputModel = () => {
+    return (
+      <Modal
+        visible={this.state.visible}
+        onCancel={() => this.setState({visible: false, target: [], inputValue: ''})}
+        footer={null}
+        closable={false}
+      >
+        <InputBox
+          placeholder={'输入你要做的事情，然后，嗯，回车。'}
+          onPressEnter={this.changeItem}
+          onChange={this.onInputChange}
+          value={this.state.inputValue}
+          style={{padding: 20}}
+        />
+        <Button block size="small" type="danger" onClick={this.delItem}>删除条目</Button>
+      </Modal>
+    )
+  }
+
   render() {
     return (
       <div id={styles.layout} style={{minHeight: document.body.offsetHeight}}>
         <Header />
-        <Box />
+        <Box
+          data={this.state.list}
+          addItem={this.addItem}
+          onClick={this.onItemClick}
+        />
         <Footer />
         <Fixed funcConponent={this.renderOption} />
+        {this.renderInputModel()}
       </div>
     )
   }
