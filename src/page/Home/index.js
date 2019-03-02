@@ -1,12 +1,13 @@
 import React from 'react';
-import {Button, Popover, Divider, Modal} from 'antd';
+import {findDOMNode} from 'react-dom';
+import {Button, Popover, Divider} from 'antd';
 import moment from 'moment';
 import styles from './index.less';
 
 import {setStorage, getStorage} from '../../utils/storage';
-import InputBox from '../../components/InputBox/';
 import Header from '../../components/Header/';
 import Footer from '../../components/Footer/';
+import InputModel from '../../components/InputModel/';
 import Fixed from '../../components/Fixed/';
 import Box from '../../components/Box';
 
@@ -25,6 +26,18 @@ class Home extends React.Component {
       list: getStorage(),
     });
   };
+
+  componentDidUpdate() {
+    this.inputFocus();
+  }
+
+  inputFocus = () => {
+    const div = findDOMNode(this.input);
+    if (!this.input || !div) return null;
+
+    const input = div.getElementsByTagName('input')[0];
+    input.focus();
+  }
 
   onInputChange = (e) => {
     this.setState({ inputValue: e.target.value });
@@ -45,6 +58,7 @@ class Home extends React.Component {
   addItem = (index = -1, ind = -1) => {
     const {list} = this.state;
     if (index >= 0) {
+      if (list[index].children.length === 10) return null;
       list[index].children.push({
         name: '',
         createTime: moment(),
@@ -79,6 +93,18 @@ class Home extends React.Component {
     this.saveList(list);
   }
 
+  focItem = () => {
+    const {list, target} = this.state;
+    if (target[1] < 0) {
+      let temp = list.splice(target[0], 1);
+      list.unshift(temp[0]);
+    } else {
+      let temp = list[target[0]].children.splice(target[1], 1);
+      list[target[0]].children.unshift(temp[0]);
+    }
+    this.saveList(list);
+  }
+
   onItemClick = (target) => {
     const {list} = this.state;
     let inputValue = '';
@@ -91,7 +117,7 @@ class Home extends React.Component {
       visible: true,
       target,
       inputValue,
-    })
+    });
   }
 
   renderOption = () => {
@@ -112,26 +138,6 @@ class Home extends React.Component {
     )
   }
 
-  renderInputModel = () => {
-    return (
-      <Modal
-        visible={this.state.visible}
-        onCancel={() => this.setState({visible: false, target: [], inputValue: ''})}
-        footer={null}
-        closable={false}
-      >
-        <InputBox
-          placeholder={'输入你要做的事情，然后，嗯，回车。'}
-          onPressEnter={this.changeItem}
-          onChange={this.onInputChange}
-          value={this.state.inputValue}
-          style={{padding: 20}}
-        />
-        <Button block size="small" type="danger" onClick={this.delItem}>删除条目</Button>
-      </Modal>
-    )
-  }
-
   render() {
     return (
       <div id={styles.layout} style={{minHeight: document.body.offsetHeight}}>
@@ -143,7 +149,19 @@ class Home extends React.Component {
         />
         <Footer />
         <Fixed funcConponent={this.renderOption} />
-        {this.renderInputModel()}
+        <InputModel
+          ref={el => {this.input = el}}
+          visible={this.state.visible}
+          onCancel={() => this.setState({visible: false, target: [], inputValue: ''})}
+          placeholder={'输入你要做的事情，然后，嗯，回车。'}
+          onPressEnter={this.changeItem}
+          onChange={this.onInputChange}
+          value={this.state.inputValue}
+        >
+          <Button size="small" type="primary" onClick={this.focItem}>任务置顶</Button>
+          <Divider type="vertical" />
+          <Button size="small" type="danger" onClick={this.delItem}>删除条目</Button>
+        </InputModel>
       </div>
     )
   }

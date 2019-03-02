@@ -13,9 +13,10 @@ const InfoContent = () => (
     </Row>
     <Divider>关于作者</Divider>
     <p>Coyeah （奇怪的英文名字）</p>
-    <p>大四软工，读着某个不知名的三本，面相前端开发。</p>
+    <p>大四软工，读着某个不知名的本科，面向前端开发。</p>
     <p>美剧 & 旅行，想跑去外面多看看。</p>
     <p>有着很多很多想做的事情，好奇、幻想、爱折腾。</p>
+    <p>Home: [ <a href="https://www.coyeah.top">https://www.coyeah.top</a> ]</p>
     <p><b>wubba lubba dub dub</b></p>
     <Divider>关于项目</Divider>
     <p>2019-02-27更新：用了思维导图的方式来建立Todo List，分层级。更好的细化任务。</p>
