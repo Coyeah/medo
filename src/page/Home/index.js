@@ -94,6 +94,7 @@ class Home extends React.Component {
   }
 
   focItem = () => {
+    this.changeItem();
     const {list, target} = this.state;
     if (target[1] < 0) {
       let temp = list.splice(target[0], 1);

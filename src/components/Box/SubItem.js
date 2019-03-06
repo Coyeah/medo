@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {
   Icon, Divider,
 } from 'antd';
+import classnames from 'classnames';
 import styles from './index.less';
 
 const number = [
@@ -18,7 +19,7 @@ export default function (props) {
 
   if (props.new) {
     return (
-      <div className={styles.block} style={{borderStyle: 'dashed'}} onClick={props.onClick}>
+      <div className={classnames({[styles.block]: true, [styles.append]: true})} onClick={props.onClick}>
         <Icon type={'plus'} /><Divider type="vertical" />{props.children}
       </div>
     )

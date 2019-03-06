@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Icon, Divider,
 } from 'antd';
+import classnames from 'classnames';
 import styles from './index.less';
 
 export default function (props) {
@@ -10,7 +11,7 @@ export default function (props) {
     <div className={styles.panel}>
       {
         props.new ? (
-          <div className={styles.block} style={{borderStyle: 'dashed'}} onClick={props.onClick}>
+          <div className={classnames({[styles.block]: true, [styles.append]: true})} onClick={props.onClick}>
             <Icon type="plus"/><Divider type="vertical" />{props.title}
           </div>
         ) : (
