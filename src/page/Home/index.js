@@ -131,7 +131,7 @@ class Home extends React.Component {
     return (
       <Popover placement="top" content={FuncContent} trigger="click">
         <Button block
-          icon="edit"
+          icon="bars"
           style={{fontSize: '1.2rem'}}
           type="primary"
         />

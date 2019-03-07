@@ -4,10 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // 引入 html-webpack
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // 用于直接复制公共的文件
 const CleanWebpackPlugin = require('clean-webpack-plugin'); // 引入clean-webpack-plugin插件，作用是清除 dist 文件及下的内容，因为每次编译完成后都会有一个 dist 文件夹存放静态文件，所以需要清除上次的 dist 文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 将CSS提取到单独的文件中。它为每个包含CSS的JS文件创建一个CSS文件。
+var bundleConfig = require("./bundle.config.json")
 
 module.exports = {
   entry: {
-    vendor: ['react', 'react-dom', 'antd'],
+    vendor: ['react', 'react-dom', 'react-router-dom'],
     bundle: path.resolve(__dirname + '/src/index.js'),
   },
   output: {
@@ -89,16 +90,19 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'index', // 配置生成的 html 的 title，不会主动替换，需要通过模板引擎语法获取来配置
+      title: 'oops', // 配置生成的 html 的 title，不会主动替换，需要通过模板引擎语法获取来配置
       filename: 'index.html',
       template:  path.resolve(__dirname, './src/index.ejs'), // 本地模板文件的位置，支持加载器（如 handlebars、ejs、undersore、html 等）
       minify: {  // 用于压缩 html 的配置
         minifyCss: true, // 压缩 html 中出现的 css 代码
         minifyJs: true, // 压缩 html 中出现的 js 代码
       },
+      dll: bundleConfig.vendor.js,
     }),
     new CopyWebpackPlugin([{
       from: __dirname + '/public',
+    }, {
+      from: __dirname + '/dll',
     }]),
     new CleanWebpackPlugin(['./dist'], {
       root:　path.resolve(__dirname, './'), // 绝对路径，就是要根据这个 root 去找要删除的文件夹，默认是这个 webpack 配置文件所在额目录
@@ -112,6 +116,9 @@ module.exports = {
       // both options are optional
       // filename: "[name].css",
       // chunkFilename: "[id].css"
+    }),
+    new webpack.DllReferencePlugin({
+      manifest: require(path.join(__dirname, 'dll', 'manifest.json')),
     }),
     new webpack.DefinePlugin({
       'ENV_MOCK': process.env.MOCK !== 'none'
