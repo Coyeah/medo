@@ -48,19 +48,22 @@ export default class Fixed extends React.PureComponent {
         <div>
           {this.props.funcConponent()}
         </div>
-        <div><img onClick={this.showDrawer}
+        <div>
+          <img
+            onClick={this.showDrawer}
             src={logo}
             style={{width: '100%'}}
-             /></div>
-        <Drawer
+          />
+          <Drawer
             closable={false}
             onClose={this.onClose}
             placement="right"
             visible={this.state.visible}
             width={640}
-        >
-          <InfoContent />
-        </Drawer>
+          >
+            <InfoContent />
+          </Drawer>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {findDOMNode} from 'react-dom';
-import {Button, Popover, Divider} from 'antd';
+import {Button, Popover, Divider, Icon} from 'antd';
 import moment from 'moment';
 import styles from './index.less';
 
@@ -124,18 +124,22 @@ class Home extends React.Component {
   renderOption = () => {
     const FuncContent = (
       <div>
-        <a onClick={() => this.saveList([])}>清除所有</a>
+        <a onClick={() => this.saveList([])}><Icon type="delete" /> 清除所有</a>
+        <Divider type="vertical" />
+        <a onClick={() => {window.open('https://www.coyeah.top/timer')}}><Icon type="branches" /> Timer（时间轴）</a>
       </div>
     );
 
     return (
-      <Popover placement="top" content={FuncContent} trigger="click">
-        <Button block
-          icon="bars"
-          style={{fontSize: '1.2rem'}}
-          type="primary"
-        />
-      </Popover>
+      <Fragment>
+        <Popover placement="right" content={FuncContent} trigger="click">
+          <Button block
+            icon="bars"
+            style={{fontSize: '1.2rem'}}
+            type="primary"
+          />
+        </Popover>
+      </Fragment>
     )
   }
 

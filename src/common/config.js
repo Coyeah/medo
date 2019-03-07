@@ -13,7 +13,7 @@ export default [
     icon: 'message'
   }, {
     name: 'blog',
-    path: 'www.coyeah.top',
+    path: 'https://www.coyeah.top',
     icon: 'home'
   }
 ];

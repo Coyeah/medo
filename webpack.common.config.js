@@ -90,7 +90,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'oops', // 配置生成的 html 的 title，不会主动替换，需要通过模板引擎语法获取来配置
+      title: 'Medo', // 配置生成的 html 的 title，不会主动替换，需要通过模板引擎语法获取来配置
       filename: 'index.html',
       template:  path.resolve(__dirname, './src/index.ejs'), // 本地模板文件的位置，支持加载器（如 handlebars、ejs、undersore、html 等）
       minify: {  // 用于压缩 html 的配置
