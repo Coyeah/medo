@@ -20,29 +20,14 @@ class Home extends React.Component {
     visible: false,
     target: [],
   };
-
   componentDidMount() {
     this.setState({
       list: getStorage(),
     });
   };
-
-  componentDidUpdate() {
-    this.inputFocus();
-  }
-
-  inputFocus = () => {
-    const div = findDOMNode(this.input);
-    if (!this.input || !div) return null;
-
-    const input = div.getElementsByTagName('input')[0];
-    input.focus();
-  }
-
   onInputChange = (e) => {
     this.setState({ inputValue: e.target.value });
   }
-
   saveList = (list = []) => {
     if (list instanceof Array) {
       setStorage(list);
@@ -54,7 +39,6 @@ class Home extends React.Component {
       });
     }
   }
-
   addItem = (index = -1, ind = -1) => {
     const {list} = this.state;
     if (index >= 0) {
@@ -72,7 +56,6 @@ class Home extends React.Component {
     }
     this.saveList(list);
   }
-
   changeItem = () => {
     const {list, inputValue, target} = this.state;
     if (target[1] < 0) {
@@ -82,7 +65,6 @@ class Home extends React.Component {
     }
     this.saveList(list);
   }
-
   delItem = () => {
     const {list, target} = this.state;
     if (target[1] < 0) {
@@ -92,7 +74,6 @@ class Home extends React.Component {
     }
     this.saveList(list);
   }
-
   focItem = () => {
     this.changeItem();
     const {list, target} = this.state;
@@ -105,7 +86,6 @@ class Home extends React.Component {
     }
     this.saveList(list);
   }
-
   onItemClick = (target) => {
     const {list} = this.state;
     let inputValue = '';
@@ -120,7 +100,6 @@ class Home extends React.Component {
       inputValue,
     });
   }
-
   renderOption = () => {
     const FuncContent = (
       <div>
@@ -129,7 +108,6 @@ class Home extends React.Component {
         <a onClick={() => {window.open('https://www.coyeah.top/timer')}}><Icon type="branches" /> Timer（时间轴）</a>
       </div>
     );
-
     return (
       <Fragment>
         <Popover placement="right" content={FuncContent} trigger="click">
@@ -142,7 +120,6 @@ class Home extends React.Component {
       </Fragment>
     )
   }
-
   render() {
     return (
       <div id={styles.layout} style={{minHeight: document.body.offsetHeight}}>

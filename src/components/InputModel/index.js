@@ -1,7 +1,16 @@
 import React from 'react';
+import {findDOMNode} from 'react-dom';
 import {Modal, Input} from 'antd';
 
 export default class InpudModel extends React.PureComponent {
+  componentDidUpdate() {
+    this.inputFocus();
+  }
+  inputFocus = () => {
+    if (!this.input) return null;
+    const input = findDOMNode(this.input);
+    input.focus();
+  }
   render() {
     const {props} = this
     return (
@@ -12,6 +21,7 @@ export default class InpudModel extends React.PureComponent {
         closable={false}
       >
         <Input
+          ref={el => {this.input = el; this.inputFocus()}}
           placeholder={props.placeholder}
           onPressEnter={props.onPressEnter}
           onChange={props.onChange}
