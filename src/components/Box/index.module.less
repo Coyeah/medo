@@ -1,0 +1,22 @@
+.box {
+
+
+  &-list {
+    box-sizing: border-box;
+    margin: 0;
+    margin-left: 20px;
+    padding: 0;
+
+    &-item {
+      border-left: 2px solid @primary-color;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 5px 10px;
+      transition: 0.2s margin;
+
+      &:hover {
+        margin-left: 2px;
+      }
+    }
+  }
+}
