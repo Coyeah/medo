@@ -14,12 +14,12 @@ class Box extends PureComponent<Props, object> {
   render() {
     const {index, name, list} = this.props;
     return (
-      <Card hoverable>
+      <Card hoverable onClick={this.props.onClick}>
         <p>{`${indexMap[index]}、${name}`}</p>
         <div className={styles['box-list']}>
           {
             list.map((item, ind) => (
-              <div className={styles['box-list-item']} key={ind}>{ind + 1}<Divider type="vertical" />{item}</div>
+              <div className={styles['box-list-item']} key={ind}>{ind + 1}<Divider type="vertical" />{item.name}</div>
             ))
           }
         </div>

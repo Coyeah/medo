@@ -7,10 +7,13 @@ import {getStorage, setStorage} from '../../utils/storage';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Box from '../../components/Box';
+import Edit from '../../components/Edit';
 
 
 class Home extends Component<Props, object> {
   state = {
+    targetIndex: -1,
+    visible: false,
     data: [],
   }
 
@@ -19,13 +22,35 @@ class Home extends Component<Props, object> {
     this.setState({data});
   }
 
+  showEdit = (index) => {
+    this.setState({ visible: true, targetIndex: index, });
+  }
+
+  onClose = () => {
+    this.setState({ visible: false, targetIndex: -1 });
+  }
+
+  onSubmit = (item) => {
+    let {data, targetIndex} = this.state;
+    if (targetIndex < 0) return;
+    if (data.length === targetIndex) {
+      data.push(item);
+    } else {
+      data.splice(targetIndex, 1, item);
+    }
+    setStorage(data);
+    this.setState({data}, () => {
+      this.onClose();
+    });
+  }
+
   boxRender = () => {
     const {data} = this.state;
     if (!data || data.length === 0) {
       return (
         <Card>
           <div style={{textAlign: 'center'}}>
-            <h1>思维导图式待办事项</h1>
+            <h2>思维导图式待办事项</h2>
             <Tag>分层级</Tag>
             <Tag>备忘录</Tag>
             <Tag>细化任务</Tag>
@@ -35,21 +60,33 @@ class Home extends Component<Props, object> {
     }
     return (
       <Fragment>
-      {
-        data.map(({name, children}, index) => (
-          <Box name={vlaue.name} index={index} list={children} />
-        ))
-      }
+        {
+          data.map(({name, children}, index) => (
+            <Box name={name} index={index} list={children} key={`${name}-${index}`} onClick={() => this.showEdit(index)} />
+          ))
+        }
       </Fragment>
     )
   }
 
   render() {
     return (
-      <div id={styles.layout} style={{minHeight: document.body.offsetHeight - 10}}>
+      <div id={styles.layout} style={{minHeight: document.body.offsetHeight}}>
         <Header />
-        {this.boxRender()}
-        <Button block type='primary' style={{marginTop: 20}}>添加任务</Button>
+        <div className={styles.box}>
+          {this.boxRender()}
+          <Button block type='primary' style={{marginTop: 20}} onClick={() => this.showEdit(this.state.data.length)}>添加任务</Button>
+          {
+            this.state.visible && (
+              <Edit
+                visible={this.state.visible}
+                onClose={this.onClose}
+                init={this.state.data[this.state.targetIndex]}
+                onSubmit={this.onSubmit}
+              />
+            )
+          }
+        </div>
         <Footer />
       </div>
     )
