@@ -10,7 +10,6 @@ import Footer from '../../components/Footer';
 import Box from '../../components/Box';
 import Edit from '../../components/Edit';
 
-
 class Home extends Component<Props, object> {
   state = {
     targetIndex: -1,
@@ -82,7 +81,7 @@ class Home extends Component<Props, object> {
   render() {
     const {data, targetIndex} = this.state;
     return (
-      <div id={styles.layout} style={{minHeight: document.body.offsetHeight}}>
+      <div id={styles.layout} style={{minHeight: document.body.offsetHeight - 3}}>
         <Header />
         <div className={styles.box}>
           {this.boxRender()}
