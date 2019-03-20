@@ -2,6 +2,7 @@ import React, {Fragment, Component} from 'react';
 import {
   Button, Card, Icon, Tag,
 } from 'antd';
+import _ from 'lodash';
 import styles from './index.module.less';
 import {getStorage, setStorage} from '../../utils/storage';
 import Header from '../../components/Header';
@@ -44,6 +45,15 @@ class Home extends Component<Props, object> {
     });
   }
 
+  onDelete = () => {
+    const {data, targetIndex} = this.state;
+    data.splice(targetIndex, 1);
+    setStorage(data);
+    this.setState({data}, () => {
+      this.onClose();
+    });
+  }
+
   boxRender = () => {
     const {data} = this.state;
     if (!data || data.length === 0) {
@@ -70,22 +80,20 @@ class Home extends Component<Props, object> {
   }
 
   render() {
+    const {data, targetIndex} = this.state;
     return (
       <div id={styles.layout} style={{minHeight: document.body.offsetHeight}}>
         <Header />
         <div className={styles.box}>
           {this.boxRender()}
           <Button block type='primary' style={{marginTop: 20}} onClick={() => this.showEdit(this.state.data.length)}>添加任务</Button>
-          {
-            this.state.visible && (
-              <Edit
-                visible={this.state.visible}
-                onClose={this.onClose}
-                init={this.state.data[this.state.targetIndex]}
-                onSubmit={this.onSubmit}
-              />
-            )
-          }
+          <Edit
+            visible={this.state.visible}
+            onClose={this.onClose}
+            onDelete={this.onDelete}
+            init={_.cloneDeep(data[targetIndex])}
+            onSubmit={this.onSubmit}
+          />
         </div>
         <Footer />
       </div>

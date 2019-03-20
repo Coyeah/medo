@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Card, Divider} from 'antd';
+import {Card, Divider, Icon} from 'antd';
 import styles from './index.module.less';
 
 const indexMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
