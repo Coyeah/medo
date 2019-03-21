@@ -14,7 +14,7 @@ class Box extends PureComponent<Props, object> {
   render() {
     const {index, name, list} = this.props;
     return (
-      <Card hoverable onClick={this.props.onClick}>
+      <Card hoverable onClick={this.props.onClick} bodyStyle={{ padding: 25 }}>
         <p>{`${indexMap[index]}、${name}`}</p>
         <div className={styles['box-list']}>
           {

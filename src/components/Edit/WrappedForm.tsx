@@ -63,7 +63,6 @@ class WrappedForm extends Component<Props, object> {
   }
 
   onSubmit = e => {
-    console.log(12);
     e.preventDefault();
     return new Promise((resolve, reject) => {
       this.props.form.validateFields((err, values) => {
@@ -75,6 +74,12 @@ class WrappedForm extends Component<Props, object> {
         }
       });
     });
+  }
+
+  keyDownHandler = e => {
+    if (e.keyCode === 13) {
+      this.props.onSubmit(e);
+    }
   }
 
   render() {
@@ -98,7 +103,7 @@ class WrappedForm extends Component<Props, object> {
                 validateTrigger: ['onChange', 'onBlur'],
                 rules: [{ required: true, message: (<span className={styles.warning}>该选项不可为空</span>) }],
               })(
-                <Input addonAfter={<Icon type="delete" onClick={() => this.delItem(index)} />} onChange={e => this.onInputChange(e.target.value, index)} autoComplete="off" />
+                <Input addonAfter={<Icon type="delete" onClick={() => this.delItem(index)} />} onChange={e => this.onInputChange(e.target.value, index)} autoComplete="off" onKeyDown={this.keyDownHandler} />
               )
             }
           </Form.Item>
@@ -114,7 +119,7 @@ class WrappedForm extends Component<Props, object> {
               getFieldDecorator('taskName', {
                 rules: [{ required: true, message: (<span className={styles.warning}>该选项不可为空</span>) }],
               })(
-                <Input addonBefore={'目标任务'} onChange={e => this.onInputChange(e.target.value, -1)} autoComplete="off" />
+                <Input addonBefore={'目标任务'} onChange={e => this.onInputChange(e.target.value, -1)} autoComplete="off" onKeyDown={this.keyDownHandler} />
               )
             }
           </Form.Item>

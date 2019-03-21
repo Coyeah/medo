@@ -53,6 +53,15 @@ class Home extends Component<Props, object> {
     });
   }
 
+  onTop = () => {
+    const {data, targetIndex} = this.state;
+    data.unshift(data.splice(targetIndex, 1)[0]);
+    setStorage(data);
+    this.setState({data}, () => {
+      this.onClose();
+    });
+  }
+
   boxRender = () => {
     const {data} = this.state;
     if (!data || data.length === 0) {
@@ -85,11 +94,12 @@ class Home extends Component<Props, object> {
         <Header />
         <div className={styles.box}>
           {this.boxRender()}
-          <Button block type='primary' style={{marginTop: 20}} onClick={() => this.showEdit(this.state.data.length)}>添加任务</Button>
+          <Button type='primary' style={{margin: '20px 15%', width: '70%'}} onClick={() => this.showEdit(this.state.data.length)}>添加任务</Button>
           <Edit
             visible={this.state.visible}
             onClose={this.onClose}
             onDelete={this.onDelete}
+            onTop={this.onTop}
             init={_.cloneDeep(data[targetIndex])}
             onSubmit={this.onSubmit}
           />
