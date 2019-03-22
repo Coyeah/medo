@@ -1,5 +1,7 @@
 # Medo - A memo for Todo
 
+Medo 是一个分层级的计划列表备忘录工具，记录下来，提高工作效率，细化任务。
+
 一个在入门 React 的时候练手的项目—— Todo List。再再再一次重写。
 
 + **2019-03-21 更新：** 修改了项目的webpack结构和使用了TypeScript，优化样式和用户体验。

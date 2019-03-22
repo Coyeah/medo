@@ -1,28 +1,12 @@
 import React, {Fragment, PureComponent} from 'react';
 import {
-  Button, Popover, Icon
+  Button, Icon
 } from 'antd';
 import moment from 'moment';
 import styles from './index.module.less';
 import {getStorage} from '../../utils/storage';
 import blober from '../../utils/blober';
-
-const FixedItem: React.FC = (props: object): React.ReactElement => {
-  let body = !!props.text && <b>{props.text}</b>;
-  if (props.render) {
-    body = props.render;
-  }
-  return (
-    <Fragment>
-      {body && (
-        <Popover content={body} placement="right" trigger="hover">
-          <Button onClick={props.onClick} icon={props.icon} style={{fontSize: 20, marginBottom: 8}} />
-        </Popover>
-      )}
-      {!body && (<Button onClick={props.onClick} icon={props.icon} style={{fontSize: 20, marginBottom: 8}} />)}
-    </Fragment>
-  )
-}
+import FixedItem from './FixedItem';
 
 export default class Fixed extends PureComponent {
   onDownload = () => {
@@ -56,6 +40,7 @@ export default class Fixed extends PureComponent {
   render() {
     return (
       <div id={styles.fixed}>
+        {this.props.children}
         <FixedItem icon="smile" render={this.introRender()} />
         <FixedItem icon="download" text="下载至本地" onClick={this.onDownload} />
       </div>

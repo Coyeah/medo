@@ -10,6 +10,7 @@ import Footer from '../../components/Footer';
 import Box from '../../components/Box';
 import Edit from '../../components/Edit';
 import Fixed from '../../components/Fixed';
+import FixedItem from '../../components/Fixed/FixedItem';
 
 class Home extends Component<Props, object> {
   state = {
@@ -105,7 +106,9 @@ class Home extends Component<Props, object> {
             onSubmit={this.onSubmit}
           />
         </div>
-        <Fixed />
+        <Fixed>
+          <FixedItem icon="plus" text="添加任务" onClick={() => this.showEdit(this.state.data.length)} />
+        </Fixed>
         <Footer />
       </div>
     )
