@@ -9,6 +9,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Box from '../../components/Box';
 import Edit from '../../components/Edit';
+import Fixed from '../../components/Fixed';
 
 class Home extends Component<Props, object> {
   state = {
@@ -104,6 +105,7 @@ class Home extends Component<Props, object> {
             onSubmit={this.onSubmit}
           />
         </div>
+        <Fixed />
         <Footer />
       </div>
     )
