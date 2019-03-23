@@ -4,18 +4,20 @@ import {
 } from 'antd';
 
 const FixedItem: React.FC = (props: object): React.ReactElement => {
-  let body = !!props.text && <b>{props.text}</b>;
-  if (props.render) {
-    body = props.render;
+  let {text, icon, render, onClick, ...restProps} = props;
+
+  let body = !!text && <b>{text}</b>;
+  if (render) {
+    body = render;
   }
   return (
     <Fragment>
       {body && (
         <Popover content={body} placement="right" trigger="hover">
-          <Button onClick={props.onClick} icon={props.icon} style={{fontSize: 20, marginBottom: 8}} />
+          <Button onClick={onClick} icon={icon} style={{fontSize: 20, marginBottom: 8}} {...restProps} />
         </Popover>
       )}
-      {!body && (<Button onClick={props.onClick} icon={props.icon} style={{fontSize: 20, marginBottom: 8}} />)}
+      {!body && (<Button onClick={onClick} icon={icon} style={{fontSize: 20, marginBottom: 8}} {...restProps} />)}
     </Fragment>
   )
 }

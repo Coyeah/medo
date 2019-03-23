@@ -107,7 +107,7 @@ class Home extends Component<Props, object> {
           />
         </div>
         <Fixed>
-          <FixedItem icon="plus" text="添加任务" onClick={() => this.showEdit(this.state.data.length)} />
+          <FixedItem icon="plus" text="添加任务" onClick={() => this.showEdit(this.state.data.length)} type="primary" />
         </Fixed>
         <Footer />
       </div>
