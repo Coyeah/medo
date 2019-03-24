@@ -156,7 +156,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'oops', // 配置生成的 html 的 title，不会主动替换，需要通过模板引擎语法获取来配置
+      title: 'Meod | A todo for memo', // 配置生成的 html 的 title，不会主动替换，需要通过模板引擎语法获取来配置
       filename: 'index.html',
       inject: true,
       template:  paths.appEjs, // 本地模板文件的位置，支持加载器（如 handlebars、ejs、undersore、html 等）
