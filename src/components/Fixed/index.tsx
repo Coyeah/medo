@@ -14,9 +14,9 @@ export default class Fixed extends PureComponent {
     if (list.length === 0) return;
     let target = '';
     list.forEach((value, index) => {
-      target += `# ${index + 1}: ${value.name} [createTime: ${moment(value.createTime).format('YYYY-MM-DD HH:mm:SS')}]\n\n`;
+      target += `# ${index + 1}: ${value.name}\n[创建时间: ${moment(value.createTime).format('YYYY-MM-DD HH:mm:SS')}]\n`;
       value.children && value.children.forEach((val, ind) => {
-        target += `## ${index + 1}-${ind + 1}: ${val.name} [createTime: ${moment(value.createTime).format('YYYY-MM-DD HH:mm:SS')}]\n\n`;
+        target += `+ ${index + 1}-${ind + 1}: ${val.name} [${moment(value.createTime).format('YYYY-MM-DD HH:mm:SS')}]\n`;
       });
     });
     blober(target, `medo-list-${moment().format('YYYYMMDD')}.md`, 'text/plain');
