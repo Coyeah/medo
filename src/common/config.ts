@@ -1,4 +1,4 @@
-export default [
+export const location = [
   {
     name: 'github',
     path: 'https://github.com/Coyeah',
@@ -17,3 +17,8 @@ export default [
     icon: 'home'
   }
 ];
+
+export const leancloud = {
+  appId: 'SSqWB5eidYJnNs4e28ING5nD-gzGzoHsz',
+  appKey: 'TxcTgscTv8ydhl0lv8XWzDcw'
+}

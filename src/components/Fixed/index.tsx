@@ -4,13 +4,13 @@ import {
 } from 'antd';
 import moment from 'moment';
 import styles from './index.module.less';
-import {getStorage} from '../../utils/storage';
+import {storage} from '../../utils';
 import blober from '../../utils/blober';
 import FixedItem from './FixedItem';
 
 export default class Fixed extends PureComponent {
   onDownload = () => {
-    let list = getStorage();
+    let list = storage('medo-list');
     if (list.length === 0) return;
     let target = '';
     list.forEach((value, index) => {

@@ -4,7 +4,8 @@ import {
 } from 'antd';
 import _ from 'lodash';
 import styles from './index.module.less';
-import {getStorage, setStorage} from '../../utils/storage';
+import {storage} from '../../utils';
+import identity from '../../decorators/identity';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Box from '../../components/Box';
@@ -12,6 +13,7 @@ import Edit from '../../components/Edit';
 import Fixed from '../../components/Fixed';
 import FixedItem from '../../components/Fixed/FixedItem';
 
+@identity('medo-user')
 class Home extends Component<Props, object> {
   state = {
     targetIndex: -1,
@@ -20,8 +22,12 @@ class Home extends Component<Props, object> {
   }
 
   componentDidMount() {
-    const data = getStorage() || [];
+    const data = storage('medo-list') || [];
     this.setState({data});
+  }
+
+  saveStorage = value => {
+    storage('medo-list', value);
   }
 
   showEdit = (index) => {
@@ -40,7 +46,7 @@ class Home extends Component<Props, object> {
     } else {
       data.splice(targetIndex, 1, item);
     }
-    setStorage(data);
+    this.saveStorage(data);
     this.setState({data}, () => {
       this.onClose();
     });
@@ -49,7 +55,7 @@ class Home extends Component<Props, object> {
   onDelete = () => {
     const {data, targetIndex} = this.state;
     data.splice(targetIndex, 1);
-    setStorage(data);
+    this.saveStorage(data);
     this.setState({data}, () => {
       this.onClose();
     });
@@ -58,7 +64,7 @@ class Home extends Component<Props, object> {
   onTop = () => {
     const {data, targetIndex} = this.state;
     data.unshift(data.splice(targetIndex, 1)[0]);
-    setStorage(data);
+    this.saveStorage(data);
     this.setState({data}, () => {
       this.onClose();
     });

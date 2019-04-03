@@ -1,13 +1,13 @@
 import React from 'react';
 import {Icon} from 'antd';
 import styles from './index.module.less';
-import config from '../../common/config';
+import {location} from '../../common/config';
 
 const Footer: React.FC = (): React.ReactElement => (
   <div id={styles.footer}>
     <div className={styles.social}>
       {
-        config.map((value, index) => (
+        location.map((value, index) => (
           <div key={index} className={styles.underline}>
             <a href={value.path} target='_blank'>
               <Icon type={value.icon} />
