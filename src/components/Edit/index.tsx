@@ -8,8 +8,9 @@ import styles from './index.module.less';
 class Edit extends PureComponent<Props, object> {
   onSubmit = e => {
     if (!this.form) return;
-    this.form.onSubmit(e).then((data) => {
+    this.form.onSubmit(e).then(({data, bin}) => {
       this.props.onSubmit(data);
+      this.props.onRecycle(bin);
     })
   }
 

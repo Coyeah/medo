@@ -2,6 +2,7 @@ import React, {Fragment, Component} from 'react';
 import {
   Form, Input, Timeline, Button, Icon
 } from 'antd';
+import _ from 'lodash';
 import styles from './index.module.less';
 
 @Form.create()
@@ -14,6 +15,7 @@ class WrappedForm extends Component<Props, object> {
         createTime: new Date(),
         children: [],
       },
+      bin: [],
     }
   }
 
@@ -57,9 +59,19 @@ class WrappedForm extends Component<Props, object> {
   }
 
   delItem = index => {
-    let {data} = this.state;
-    data.children.splice(index, 1, null);
-    this.setState({data});
+    let {state: {data, bin}, props: {form: {setFieldsValue}}} = this;
+    let del = data.children.splice(index, 1);
+    console.log(del);
+    if (del[0].name !== '') {
+      bin = [...del, ...bin];
+    }
+    this.setState({data, bin}, () => {
+      const subtasks = data.children.map(value => value.name);
+      setFieldsValue({
+        taskName: data.name,
+        subtasks,
+      });
+    });
   }
 
   onSubmit = e => {
@@ -68,9 +80,9 @@ class WrappedForm extends Component<Props, object> {
       this.props.form.validateFields((err, values) => {
         if (!err) {
           // console.log('Received values of form: ', values);
-          const {data} = this.state;
+          const {data, bin} = this.state;
           data.children = data.children.filter(value => !!value);
-          resolve(data);
+          resolve({data, bin});
         }
       });
     });
