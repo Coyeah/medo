@@ -4,7 +4,7 @@ const connect = (id) => {
   AV.init(leancloud.appId, leancloud.appKey);
   new Promise((resolve, reject) => {
     let query = new AV.Query('Visitor');
-    query.contains('name','id');
+    query.contains('name',id);
     query.first().then(data => {
       resolve(data)
     }, error => {
