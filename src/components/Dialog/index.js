@@ -41,6 +41,9 @@ export default class Dialog extends PureComponent {
       modalProps = { ...modalProps, footer: footerRender.apply(this) };
     }
     let body = content;
+    if (!body && BodyComponent) {
+      body = <BodyComponent {...restProps} />;
+    }
     if (!body && render) {
       body = render.bind(this)(this);
     }
