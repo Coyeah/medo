@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import { LocaleProvider, Form, Modal, Input } from 'antd';
+import { LocaleProvider, Modal } from 'antd';
 import _ from 'lodash';
 import createBrowserHistory from 'history/createBrowserHistory';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
@@ -61,6 +61,7 @@ Dialog.open = (options) => {
     maskClosable: false,
     transition: false,
     onOk() {
+      this.props.onSubmit.bind(this)();
       this.destroy();
     },
     onCancel() {

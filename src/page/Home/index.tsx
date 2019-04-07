@@ -1,7 +1,7 @@
 import React, {Fragment, Component} from 'react';
 import {
   Button, Card, Icon, Tag,
-  Typography, Divider,
+  Typography
 } from 'antd';
 import _ from 'lodash';
 import styles from './index.module.less';
@@ -11,6 +11,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Box from '../../components/Box';
 import Edit from '../../components/Edit';
+import Panel from '../../components/Panel';
 import Fixed from '../../components/Fixed';
 import FixedItem from '../../components/Fixed/FixedItem';
 import Dialog from '../../components/Dialog';
@@ -23,6 +24,7 @@ class Home extends Component<Props, object> {
     targetIndex: -1,
     visible: false,
     data: [],
+    isNormal: true,
   }
 
   componentDidMount() {
@@ -57,7 +59,7 @@ class Home extends Component<Props, object> {
     });
   }
 
-  onRecycle = (bin) => {
+  onRecycle = bin => {
     if (bin.length === 0) return;
     let binList = storage('medo-bin') || [];
     bin = [...bin, ...binList];
@@ -127,31 +129,42 @@ class Home extends Component<Props, object> {
       ),
       okText: '清空',
       cancelText: '返回',
-      onOk: () => storage('medo-bin', null)
+      maskClosable: true,
+      onSubmit: () => storage('medo-bin', null),
     })
   }
 
   render() {
-    const {data, targetIndex} = this.state;
+    const {data, targetIndex, isNormal} = this.state;
     return (
       <div id={styles.layout} style={{minHeight: document.body.offsetHeight - 3}}>
         <div className={styles.background} />
         <Header />
-        <div className={styles.box}>
-          {this.boxRender()}
-          <Edit
-            visible={this.state.visible}
-            onClose={this.onClose}
-            onDelete={this.onDelete}
-            onTop={this.onTop}
-            init={_.cloneDeep(data[targetIndex])}
-            onSubmit={this.onSubmit}
-            onRecycle={this.onRecycle}
-          />
+        <div className={styles.box} style={{width: isNormal ? 630 : 930}}>
+          {
+            isNormal ?
+             (
+               <Fragment>
+                 {this.boxRender()}
+                 <Edit
+                   visible={this.state.visible}
+                   onClose={this.onClose}
+                   onDelete={this.onDelete}
+                   onTop={this.onTop}
+                   init={_.cloneDeep(data[targetIndex])}
+                   onSubmit={this.onSubmit}
+                   onRecycle={this.onRecycle}
+                 />
+               </Fragment>
+             ) : (
+               <Panel />
+             )
+          }
         </div>
         <Fixed>
-          <FixedItem icon="plus" text="添加任务" onClick={() => this.showEdit(this.state.data.length)} type="primary" />
-          <FixedItem icon="delete" text="回收站" onClick={this.recycleRender} />
+          <FixedItem icon="calendar" text="日历" onClick={() => this.setState({isNormal: !isNormal})} />
+          <FixedItem icon="plus" text="添加任务" disabled={!isNormal} onClick={() => this.showEdit(this.state.data.length)} type='primary' />
+          <FixedItem icon="delete" text="回收站" disabled={!isNormal} onClick={this.recycleRender}/>
         </Fixed>
         <Footer />
       </div>
