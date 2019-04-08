@@ -1,11 +1,13 @@
 import React, {Fragment, PureComponent} from 'react';
 import {
-  Timeline, Card, Divider, Input, Popover,
-  DatePicker, Tag, Row, Col,
+  Card, Divider, Input, Popover,
+  DatePicker, Tag, Row, Col, Typography
 } from 'antd';
 import moment from 'moment';
+import styles from './index.module.less';
 import {storage} from '../../utils';
 
+const { Text } = Typography
 const InputGroup = Input.Group;
 const format = 'YYYY-MM-DD';
 
@@ -31,35 +33,39 @@ class Panel extends PureComponent<Props, object> {
     });
   }
 
-  // itemRender = () => {
-  //   let date = moment().day(-14);
-  //   return [...Array(21)].map((value, index) => {
-  //     let timer = date.add(1, 'days').format(format);
-  //     return (
-  //       <Timeline.Item key={index}>
-  //         <Tag color={timer === moment().format(format) && "#00796B"}>{timer}</Tag>
-  //         <Divider type="vertical"/>
-  //         {
-  //           !this.state.data[timer]
-  //             ? (
-  //               <span>========</span>
-  //             )
-  //             : (
-  //               <Popover content={this.state.data[timer].map((value, index) => (
-  //                 <p key={index}>{index + 1}: {value}<a onClick={() => {}} style={{float: 'right', marginLeft: 20}}>X</a></p>
-  //               ))} placement="top">
-  //                 <b>{this.state.data[timer][0]}</b>
-  //               </Popover>
-  //             )
-  //         }
-  //       </Timeline.Item>
-  //     )
-  //   });
-  // }
+  itemRender = () => {
+    const {data} = this.state;
+    let date = moment().day(-7);
+    return [...Array(21)].map((val, ind) => {
+      let timer = date.add(1, 'days').format(format);
+      if (!data[timer]) {
+        return (
+          <Col span={3} className={styles.item} key={timer}>
+            <Tag style={{marginBottom: 3}} color={timer === moment().format(format) && "#00796B"} onClick={() => this.setState({datePickerValue: moment(timer)})}>{timer}</Tag>
+          </Col>
+        )
+      } else {
+        return (
+          <Popover content={data[timer].map((text, numb) => (
+            <div className={styles.itemDetail} key={numb}>* {text}</div>
+          ))} placement={ind % 7 > 3 ? 'left' : 'right'} key={timer}>
+            <Col span={3} className={styles.item}>
+              <Tag style={{marginBottom: 3}} color={timer === moment().format(format) && "#00796B"} onClick={() => this.setState({datePickerValue: moment(timer)})}>{timer}</Tag>
+              {
+                data[timer].map((value, index) => (
+                  <div key={index} className={styles.itemText}>* {value}</div>
+                ))
+              }
+            </Col>
+          </Popover>
+        )
+      }
+    })
+  }
 
   render() {
     return (
-      <Card>
+      <Card style={{padding: 5}}>
         <InputGroup compact>
           <DatePicker
             style={{ width: '20%' }}
@@ -76,6 +82,10 @@ class Panel extends PureComponent<Props, object> {
             maxLength={30}
           />
         </InputGroup>
+        <Divider />
+        <Row>
+          {this.itemRender()}
+        </Row>
       </Card>
     )
   }

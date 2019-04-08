@@ -140,7 +140,7 @@ class Home extends Component<Props, object> {
       <div id={styles.layout} style={{minHeight: document.body.offsetHeight - 3}}>
         <div className={styles.background} />
         <Header />
-        <div className={styles.box} style={{width: isNormal ? 630 : 930}}>
+        <div className={styles.box} style={{width: isNormal ? 630 : 1230}}>
           {
             isNormal ?
              (
