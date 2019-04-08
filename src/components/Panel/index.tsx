@@ -1,6 +1,6 @@
-import React, {Fragment, PureComponent} from 'react';
+import React, {Fragment, Component} from 'react';
 import {
-  Card, Divider, Input, Popover,
+  Card, Divider, Input, Popover, Icon,
   DatePicker, Tag, Row, Col, Typography
 } from 'antd';
 import moment from 'moment';
@@ -11,7 +11,7 @@ const { Text } = Typography
 const InputGroup = Input.Group;
 const format = 'YYYY-MM-DD';
 
-class Panel extends PureComponent<Props, object> {
+class Panel extends Component<Props, object> {
   state = {
     data: {},
     datePickerValue: moment(),
@@ -33,6 +33,17 @@ class Panel extends PureComponent<Props, object> {
     });
   }
 
+  delPlan = (timer, index) => {
+    let {data} = this.state;
+    data[timer].splice(index, 1);
+    if (data[timer].length === 0) {
+      delete data[timer];
+    }
+    this.setState({data}, () => {
+      storage('medo-map', data);
+    })
+  }
+
   itemRender = () => {
     const {data} = this.state;
     let date = moment().day(-7);
@@ -40,17 +51,17 @@ class Panel extends PureComponent<Props, object> {
       let timer = date.add(1, 'days').format(format);
       if (!data[timer]) {
         return (
-          <Col span={3} className={styles.item} key={timer}>
-            <Tag style={{marginBottom: 3}} color={timer === moment().format(format) && "#00796B"} onClick={() => this.setState({datePickerValue: moment(timer)})}>{timer}</Tag>
+          <Col span={3} className={styles.item} key={timer} onClick={() => this.setState({datePickerValue: moment(timer)})}>
+            <Tag style={{marginBottom: 3}} color={timer === moment().format(format) && "#00796B"}>{timer}</Tag>
           </Col>
         )
       } else {
         return (
           <Popover content={data[timer].map((text, numb) => (
-            <div className={styles.itemDetail} key={numb}>* {text}</div>
+            <div className={styles.itemDetail} key={numb}>* {text}<a style={{float: 'right'}} onClick={() => this.delPlan(timer, numb)}><Divider type="vertical" /><Icon type="delete" /></a></div>
           ))} placement={ind % 7 > 3 ? 'left' : 'right'} key={timer}>
-            <Col span={3} className={styles.item}>
-              <Tag style={{marginBottom: 3}} color={timer === moment().format(format) && "#00796B"} onClick={() => this.setState({datePickerValue: moment(timer)})}>{timer}</Tag>
+            <Col span={3} className={styles.item} onClick={() => this.setState({datePickerValue: moment(timer)})}>
+              <Tag style={{marginBottom: 3}} color={timer === moment().format(format) && "#00796B"}>{timer}</Tag>
               {
                 data[timer].map((value, index) => (
                   <div key={index} className={styles.itemText}>* {value}</div>
@@ -80,6 +91,7 @@ class Panel extends PureComponent<Props, object> {
             onPressEnter={this.addPlan}
             placeholder="三十个字说出你的计划，回车提交。"
             maxLength={30}
+            addonAfter={<Icon type="enter" />}
           />
         </InputGroup>
         <Divider />
