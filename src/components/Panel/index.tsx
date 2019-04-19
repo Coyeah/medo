@@ -44,6 +44,12 @@ class Panel extends Component<Props, object> {
     })
   }
 
+  onItemClick = (timer) => {
+    this.setState({datePickerValue: moment(timer)}, () => {
+      this.input.focus();
+    })
+  }
+
   itemRender = () => {
     const {data} = this.state;
     let date = moment().day(-7);
@@ -51,7 +57,7 @@ class Panel extends Component<Props, object> {
       let timer = date.add(1, 'days').format(format);
       if (!data[timer]) {
         return (
-          <Col span={3} className={styles.item} key={timer} onClick={() => this.setState({datePickerValue: moment(timer)})}>
+          <Col span={3} className={styles.item} key={timer} onClick={() => this.onItemClick(timer)}>
             <Tag style={{marginBottom: 3}} color={timer === moment().format(format) && "#00796B"}>{timer}</Tag>
           </Col>
         )
@@ -60,7 +66,7 @@ class Panel extends Component<Props, object> {
           <Popover content={data[timer].map((text, numb) => (
             <div className={styles.itemDetail} key={numb}>* {text}<a style={{float: 'right'}} onClick={() => this.delPlan(timer, numb)}><Divider type="vertical" /><Icon type="delete" /></a></div>
           ))} placement={ind % 7 > 3 ? 'left' : 'right'} key={timer}>
-            <Col span={3} className={styles.item} onClick={() => this.setState({datePickerValue: moment(timer)})}>
+            <Col span={3} className={styles.item} onClick={() => this.onItemClick(timer)}>
               <Tag style={{marginBottom: 3}} color={timer === moment().format(format) && "#00796B"}>{timer}</Tag>
               {
                 data[timer].map((value, index) => (
@@ -85,13 +91,14 @@ class Panel extends Component<Props, object> {
             placeholder="计划日期"
           />
           <Input
+            ref={el => this.input = el}
             style={{ width: '80%' }}
             value={this.state.inputValue}
             onChange={e => this.setState({inputValue: e.target.value})}
             onPressEnter={this.addPlan}
             placeholder="三十个字说出你的计划，回车提交。"
             maxLength={30}
-            addonAfter={<Icon type="enter" />}
+            addonAfter={<Icon onClick={this.addPlan} type="enter" />}
           />
         </InputGroup>
         <Divider />
