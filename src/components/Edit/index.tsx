@@ -24,14 +24,12 @@ class Edit extends PureComponent<Props, object> {
         title={
           <div>
             任务编辑
-            {
-              !!this.props.init && (
-                <Fragment>
-                  <Divider type="vertical" />
-                  <Button icon="to-top" size='small' onClick={onTop}>置顶</Button>
-                </Fragment>
-              )
-            }
+            {!!this.props.init && (
+              <Fragment>
+                <Divider type="vertical" />
+                <Button icon="to-top" size='small' onClick={onTop}>置顶</Button>
+              </Fragment>
+            )}
           </div>
         }
         width={620}

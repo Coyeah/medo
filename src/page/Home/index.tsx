@@ -6,15 +6,15 @@ import {
 import _ from 'lodash';
 import styles from './index.module.less';
 import {storage, generateUUID} from '../../utils';
-import identity from '../../decorators/identity';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Box from '../../components/Box';
-import Edit from '../../components/Edit';
-import Panel from '../../components/Panel';
-import Fixed from '../../components/Fixed';
-import FixedItem from '../../components/Fixed/FixedItem';
-import Dialog from '../../components/Dialog';
+import identity from '@/decorators/identity';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import Box from '@/components/Box';
+import Edit from '@/components/Edit';
+import Panel from '@/components/Panel';
+import Fixed from '@/components/Fixed';
+import FixedItem from '@/components/Fixed/FixedItem';
+import Dialog from '@/components/Dialog';
 
 const { Paragraph } = Typography;
 

@@ -1,9 +1,11 @@
 import React, {Fragment, Component} from 'react';
 import {
-  Form, Input, Timeline, Button, Icon
+  Form, Input, Timeline, Button, Icon, Popover
 } from 'antd';
-import _ from 'lodash';
+import classnames from 'classnames';
 import styles from './index.module.less';
+import Dialog from '@/components/Dialog';
+import Remarks from './Remarks';
 
 @Form.create()
 class WrappedForm extends Component<Props, object> {
@@ -61,17 +63,31 @@ class WrappedForm extends Component<Props, object> {
   delItem = index => {
     let {state: {data, bin}, props: {form: {setFieldsValue}}} = this;
     let del = data.children.splice(index, 1);
-    console.log(del);
     if (del[0].name !== '') {
       bin = [...del, ...bin];
     }
     this.setState({data, bin}, () => {
       const subtasks = data.children.map(value => value.name);
-      setFieldsValue({
-        taskName: data.name,
-        subtasks,
-      });
+      setFieldsValue({ taskName: data.name, subtasks });
     });
+  }
+
+  updateRemarks = (newList, index) => {
+    let {data} = this.state;
+    data.children[index].remarks = [...newList];
+    this.setState({data});
+  }
+
+  remarksRender = (remarks = [], index) => {
+    Dialog.open({
+      titleRender: () => (<div><Icon type="appstore" /> 备注</div>),
+      transition: true,
+      content: (
+        <Remarks list={remarks} onClick={newList => this.updateRemarks(newList, index)} />
+      ),
+      maskClosable: true,
+      footerRender: () => null
+    })
   }
 
   onSubmit = e => {
@@ -79,7 +95,6 @@ class WrappedForm extends Component<Props, object> {
     return new Promise((resolve, reject) => {
       this.props.form.validateFields((err, values) => {
         if (!err) {
-          // console.log('Received values of form: ', values);
           const {data, bin} = this.state;
           data.children = data.children.filter(value => !!value);
           resolve({data, bin});
@@ -89,35 +104,40 @@ class WrappedForm extends Component<Props, object> {
   }
 
   keyDownHandler = e => {
-    if (e.keyCode === 13) {
-      this.props.onSubmit(e);
-    }
+    if (e.keyCode === 13) this.props.onSubmit(e);
   }
 
   render() {
-    const {
-      init,
-      form: {getFieldDecorator}
-    } = this.props;
-
-    if (!this.state.data) {
-      return null;
-    }
+    const { init, form: {getFieldDecorator} } = this.props;
+    if (!this.state.data) return null;
     const {data: {children: items}} = this.state
-
     const formItems = items && items.map((item, index) => {
       if (!item) return null;
+      const remarksCx = classnames({
+        [styles.remarksExisted]: item.remarks && item.remarks.length > 0,
+      })
       return (
         <Timeline.Item key={index}>
           <Form.Item >
-            {
-              getFieldDecorator(`subtasks[${index}]`, {
-                validateTrigger: ['onChange', 'onBlur'],
-                rules: [{ required: true, message: (<span className={styles.warning}>该选项不可为空</span>) }],
-              })(
-                <Input addonAfter={<Icon type="delete" onClick={() => this.delItem(index)} />} onChange={e => this.onInputChange(e.target.value, index)} autoComplete="off" onKeyDown={this.keyDownHandler} />
-              )
-            }
+            {getFieldDecorator(`subtasks[${index}]`, {
+              validateTrigger: ['onChange', 'onBlur'],
+              rules: [{ required: true, message: (<span className={styles.warning}>该选项不可为空</span>) }],
+            })(
+              <Input
+                addonBefore={
+                  <Popover content={'备注'} trigger="hover">
+                    <Icon type="appstore" onClick={() => this.remarksRender(item.remarks, index)} className={remarksCx} />
+                  </Popover>
+                }
+                addonAfter={
+                  <Popover content={'删除'} trigger="hover">
+                    <Icon type="delete" onClick={() => this.delItem(index)} />
+                  </Popover>
+                }
+                onChange={e => this.onInputChange(e.target.value, index)}
+                onKeyDown={this.keyDownHandler}
+              />
+            )}
           </Form.Item>
         </Timeline.Item>
       )
@@ -127,13 +147,15 @@ class WrappedForm extends Component<Props, object> {
       <Fragment>
         <div className={styles.main}>
           <Form.Item >
-            {
-              getFieldDecorator('taskName', {
-                rules: [{ required: true, message: (<span className={styles.warning}>该选项不可为空</span>) }],
-              })(
-                <Input addonBefore={'目标任务'} onChange={e => this.onInputChange(e.target.value, -1)} autoComplete="off" onKeyDown={this.keyDownHandler} />
-              )
-            }
+            {getFieldDecorator('taskName', {
+              rules: [{ required: true, message: (<span className={styles.warning}>该选项不可为空</span>) }],
+            })(
+              <Input
+                addonBefore={'目标任务'}
+                onChange={e => this.onInputChange(e.target.value, -1)}
+                onKeyDown={this.keyDownHandler}
+              />
+            )}
           </Form.Item>
           <div className={styles.sub}>
             <Timeline>
