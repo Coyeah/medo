@@ -8,15 +8,18 @@ const Remarks: React.FC = (props: object): React.ReactElement => {
     if (e.keyCode === 13) onClick(list);
   }
   const onClick = () => {
-    if (list.length === 5) list.shift();
-    setList([...list, inputValue]);
+    let newList = list;
+    if (newList.length === 5) newList.shift();
+    newList = [...list, inputValue];
     setInputValue('');
-    props.onClick(list);
+    setList(newList);
+    props.onClick(newList);
   }
   const onDelete = index => {
-    list.splice(index, 1);
-    setList([...list]);
-    props.onClick(list);
+    let newList = list;
+    newList.splice(index, 1);
+    setList([...newList]);
+    props.onClick(newList);
   }
   return (
     <>

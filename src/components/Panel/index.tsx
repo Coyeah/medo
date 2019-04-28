@@ -52,7 +52,7 @@ class Panel extends Component<Props, object> {
 
   itemRender = () => {
     const {data} = this.state;
-    let date = moment().day(-7);
+    let date = moment().startOf('week').subtract(8, 'days');
     return [...Array(21)].map((val, ind) => {
       let timer = date.add(1, 'days').format(format);
       if (!data[timer]) {
