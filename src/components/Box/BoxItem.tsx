@@ -13,7 +13,7 @@ const BoxItem: React.FC = (props: object): React.ReactElement => {
     )
     return (
       <Popover placement="left" content={content} trigger="hover">
-        <div {...restProps}>{index}<Divider type="vertical" />{item.name}</div>
+        <div {...restProps}>{index}<Divider type="vertical" />{item.name} <Icon style={{color: '#00796B'}} type="appstore" /></div>
       </Popover>
     )
   } else {

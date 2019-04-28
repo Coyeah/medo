@@ -77,7 +77,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "antd": "^3.15.0",
+    "antd": "^3.16.6",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "history": "^4.7.2",
