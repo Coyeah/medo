@@ -1,3 +1,4 @@
+import React from 'react';
 import _ from 'lodash';
 
 /**
@@ -56,4 +57,12 @@ export const generateUUID = () => {
     return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
   });
   return uuid;
+}
+
+/**
+ * react lazy 封装组件
+ */
+export const dynamicWrapper = (fn: object): object => {
+  let WrapperComponent = React.lazy(fn);
+  return () => <WrapperComponent />
 }

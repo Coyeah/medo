@@ -1,0 +1,30 @@
+@prefixCls: medo-item-box;
+
+.@{prefixCls} {
+
+  &-layout, &-sub {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &-title-index, &-prefix {
+    margin: 6px 0;
+    text-align: right;
+  }
+
+  &-prefix {
+    margin-right: 10px;
+
+    &-work {
+      color: @primary-color;
+    }
+  }
+
+  &-input {
+    width: 100%;
+  }
+
+  &-bold {
+    font-weight: bold;
+  }
+}

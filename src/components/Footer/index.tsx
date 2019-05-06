@@ -16,7 +16,7 @@ const Footer: React.FC = (): React.ReactElement => (
         ))
       }
     </div>
-    <p>Copyright {(new Date()).getFullYear() === 2019 ? '2019' : `2019 - ${(new Date()).getFullYear()}`} &copy; Created by Coyeah</p>
+    <p className={styles.text}>Copyright {(new Date()).getFullYear() === 2019 ? '2019' : `2019 - ${(new Date()).getFullYear()}`} &copy; Created by Coyeah</p>
   </div>
 )
 
