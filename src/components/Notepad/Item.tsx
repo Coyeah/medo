@@ -10,7 +10,7 @@ const Item: React.FC = (props: object): React.ReactElement => {
   if (remarks && remarks.length > 0) {
     hasRemarks = true;
     content = remarks.map((value, index) => (
-      <div key={index}>{index + 1}：{value}</div>
+      <div key={index}>{value}</div>
     ))
   }
   return (

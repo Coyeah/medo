@@ -2,12 +2,11 @@ import React, {
   useState, useRef, useEffect, useCallback,
 } from 'react';
 import {Input} from 'antd';
-import styles from './index.module.less';
 
 const { TextArea } = Input;
 
 const Editor: React.FC = (props: object): React.ReactElement => {
-  const {type, value, onConfirm, onChange, ...restProps} = props;
+  const {prefixCls, type, value, onConfirm, onChange, ...restProps} = props;
   const Wrapped = type === 'textarea' ? TextArea : Input;
   const inputRef = useRef(null);
   useEffect(() => {
@@ -22,7 +21,7 @@ const Editor: React.FC = (props: object): React.ReactElement => {
     if (e && e.target && typeof e.target.value === 'string') onChange && onChange(e.target.value);
   }, [onChange]);
   return (
-    <div className={styles['text-edit-textarea']} {...restProps}>
+    <div className={`${prefixCls}-textarea`} {...restProps}>
       <Wrapped
         ref={inputRef}
         value={value}

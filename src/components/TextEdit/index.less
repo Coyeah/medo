@@ -1,28 +1,31 @@
-.text-edit-layout {
-  width: 100%;
-  position: relative;
+@prefixCls: medo-text-edit;
 
-  .text-edit-options {
+.@{prefixCls} {
+
+  &-layout {
+    width: 100%;
+    position: relative;
+  }
+
+  &-options {
     margin-left: 8px;
     color: @primary-color;
     cursor: pointer;
   }
 
-  .text-edit-textarea {
+  &-textarea {
     width: 100%;
     position: relative;
     left: -12px;
-    // top: -5px;
     z-index: 100;
   }
 
-  .text-edit-content {
+  &-content {
     font-size: 14px;
     margin: 6px 0;
-    // padding: 4px 11px;
   }
 
-  .text-edit-bold {
+  &-bold {
     font-weight: bold;
   }
 }

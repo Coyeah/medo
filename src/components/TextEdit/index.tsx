@@ -2,7 +2,9 @@ import React, {Fragment} from 'react';
 import {Icon} from 'antd';
 import classnames from 'classnames';
 import Editor from './Editor';
-import styles from './index.module.less';
+import './index.less';
+
+const prefixCls = 'medo-text-edit';
 
 class TextEdit extends React.PureComponent {
   state = {
@@ -60,15 +62,23 @@ class TextEdit extends React.PureComponent {
       onEditChange, onValueChange, setContentRef
     } = this;
     if (isEdit) {
-      return <Editor type={type || 'input'} value={current} onChange={onValueChange} onConfirm={onEditChange} />
+      return (
+        <Editor
+          prefixCls={prefixCls}
+          type={type || 'input'}
+          value={current}
+          onChange={onValueChange}
+          onConfirm={onEditChange}
+        />
+      )
     } else {
       return (
-        <div ref={setContentRef} className={styles['text-edit-content']}>
-          <span className={classnames({[styles['text-edit-bold']]: bold})}>{current}</span>
-          <Icon onClick={onEditChange} className={styles['text-edit-options']} type="edit" />
+        <div ref={setContentRef} className={`${prefixCls}-content`}>
+          <span className={classnames({[`${prefixCls}-bold`]: bold})}>{current}</span>
+          <Icon onClick={onEditChange} className={`${prefixCls}-options`} type="edit" />
           {React.Children.map(children, (child, key) =>
             React.cloneElement(child, {
-              className: styles['text-edit-options']
+              className: `${prefixCls}-options`
             })
           )}
         </div>
@@ -78,7 +88,7 @@ class TextEdit extends React.PureComponent {
 
   render() {
     return (
-      <div className={styles['text-edit-layout']}>
+      <div className={`${prefixCls}-layout`}>
         {this.contentRender()}
       </div>
     )
