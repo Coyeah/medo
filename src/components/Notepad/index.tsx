@@ -17,15 +17,22 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
     index, name, list,
     onChange,
   } = props;
+  console.log(list.length);
   const addItem = useCallback(() => {
     onChange && onChange(0, {index});
-  }, [onChange]);
+  }, [onChange, index]);
   const delItem = useCallback(() => {
     onChange && onChange(2, {index});
-  });
-  const textChange = useCallback(value => {
+  }, [onChange, index]);
+  const onTextChange = useCallback(value => {
     onChange && onChange(1, {index, target: value})
-  });
+  }, [onChange, index]);
+  const onItemTextChange = useCallback((value, childrenIndex) => {
+    onChange && onChange(1, {index, childrenIndex, target: value})
+  }, [onChange, index]);
+  const onItemDelete = useCallback((childrenIndex) => {
+    onChange && onChange(2, {index, childrenIndex});
+  }, [onChange, index]);
   return (
     <Card hoverable bodyStyle={cardBodyStyle}>
       <div className={`${prefixCls}-layout`}>
@@ -36,7 +43,7 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
           bold
           prefixCls={prefixCls}
           value={name}
-          onConfirm={textChange}
+          onConfirm={onTextChange}
           onDelete={delItem}
         />
       </div>
@@ -45,9 +52,9 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
           <Item
             key={ind}
             prefixCls={prefixCls}
-            index={{index, childrenIndex: ind}}
             item={val}
-            onChange={onChange}
+            onTextChange={value => onItemTextChange(value, ind)}
+            onItemDelete={() => onItemDelete(ind)}
           />
         ))
       }

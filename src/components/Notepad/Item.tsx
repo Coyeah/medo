@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import TextEdit from './WrappedTextEdit';
 
 const Item: React.FC = (props: object): React.ReactElement => {
-  const {index, item: {name, remarks}, onChange, prefixCls, ...restProps} = props;
+  const {item: {name, remarks}, onTextChange, onItemDelete, prefixCls, ...restProps} = props;
   let content = (<span>点击添加备注</span>),
     hasRemarks = false;
   if (remarks && remarks.length > 0) {
@@ -13,9 +13,6 @@ const Item: React.FC = (props: object): React.ReactElement => {
       <div key={index}>{value}</div>
     ))
   }
-  const textChange = useCallback(value => {
-    onChange && onChange(1, {...index, target: value})
-  });
   return (
     <div className={`${prefixCls}-sub`}>
       <div className={`${prefixCls}-prefix`}>
@@ -30,7 +27,8 @@ const Item: React.FC = (props: object): React.ReactElement => {
       <TextEdit
         prefixCls={prefixCls}
         value={name}
-        onConfirm={textChange}
+        onConfirm={onTextChange}
+        onDelete={onItemDelete}
       />
     </div>
   )

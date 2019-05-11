@@ -15,6 +15,8 @@ class Medo extends React.Component {
   state = {
     targetIndex: -1,
     data: [],
+    set: [],
+    map: {},
   }
 
   componentDidMount() {
@@ -34,6 +36,16 @@ class Medo extends React.Component {
 
   setData = async list => {
     await updateListData({ list });
+  }
+
+  formatData = (data) => {
+    if (!data) data = this.state.data;
+    let set = [], map = {};
+    data.forEach(value => {
+      set.push(value.id);
+      map[value.id] = value;
+    });
+    this.setState({set, map});
   }
   /**
    * flag: 0 - add; 1 - change; 2 - delete;
@@ -67,7 +79,9 @@ class Medo extends React.Component {
         }
         break;
       case 2:
-        if (typeof index !== 'undefined') {
+        if (typeof childrenIndex !== 'undefined') {
+          data[index].children.splice(childrenIndex, 1);
+        } else {
           data.splice(index, 1);
         }
         break;
