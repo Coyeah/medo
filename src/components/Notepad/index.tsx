@@ -1,7 +1,10 @@
-import React from 'react';
-import {Row, Col, Card} from 'antd';
+import React, {
+  useCallback,
+} from 'react';
+import {Card, Icon} from 'antd';
 import classnames from 'classnames';
-import TextEdit from '@/components/TextEdit';
+import TextEdit from './WrappedTextEdit';
+import AddIcon from './AddIcon';
 import Item from './Item';
 import './index.less';
 
@@ -11,21 +14,50 @@ const indexMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九',
 
 const Notepad: React.FC = (props: object): React.ReactElement => {
   const {
-    index, name, list
+    index, name, list,
+    onChange,
   } = props;
+  const addItem = useCallback(() => {
+    onChange && onChange(0, {index});
+  }, [onChange]);
+  const delItem = useCallback(() => {
+    onChange && onChange(2, {index});
+  });
+  const textChange = useCallback(value => {
+    onChange && onChange(1, {index, target: value})
+  });
   return (
     <Card hoverable bodyStyle={cardBodyStyle}>
       <div className={`${prefixCls}-layout`}>
-        <div className={`${prefixCls}-title-index ${prefixCls}-bold`}>{indexMap[index]}、</div>
-        <div className={`${prefixCls}-input`}><TextEdit value={name} bold /></div>
+        <div className={`${prefixCls}-title-index ${prefixCls}-bold`}>
+          {indexMap[index]}、
+        </div>
+        <TextEdit
+          bold
+          prefixCls={prefixCls}
+          value={name}
+          onConfirm={textChange}
+          onDelete={delItem}
+        />
       </div>
       {
-        list.map((value, index) => (
-          <Item key={index} item={value} prefixCls={prefixCls} />
+        list.map((val, ind) => (
+          <Item
+            key={ind}
+            prefixCls={prefixCls}
+            index={{index, childrenIndex: ind}}
+            item={val}
+            onChange={onChange}
+          />
         ))
       }
+      <AddIcon prefixCls={prefixCls} onClick={addItem} />
     </Card>
   )
 }
+
+Notepad.Add = (props: object): React.ReactElement => (
+  <AddIcon prefixCls={prefixCls} {...props} />
+);
 
 export default Notepad;
