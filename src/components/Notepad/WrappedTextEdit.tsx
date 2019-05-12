@@ -7,7 +7,9 @@ const WrappedTextEdit: React.FC = (props: object): React.ReactElement => {
   return (
     <div className={`${prefixCls}-input`}>
       <TextEdit {...restProps}>
-        <Icon type="delete" onClick={onDelete} />
+        {onDelete && (
+          <Icon type="delete" onClick={onDelete} />
+        )}
       </TextEdit>
     </div>
   )

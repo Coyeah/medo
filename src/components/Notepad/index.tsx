@@ -1,5 +1,5 @@
 import React, {
-  useCallback,
+  useCallback, useState,
 } from 'react';
 import {Card, Icon} from 'antd';
 import classnames from 'classnames';
@@ -8,16 +8,19 @@ import AddIcon from './AddIcon';
 import Item from './Item';
 import './index.less';
 
-const prefixCls = 'medo-item-box';
-const cardBodyStyle = {padding: 25};
-const indexMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+const prefixCls = 'medo-item-box',
+  indexMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'],
+  cardBodyStyle = {padding: 15};
 
 const Notepad: React.FC = (props: object): React.ReactElement => {
   const {
     index, name, list,
     onChange,
   } = props;
-  console.log(list.length);
+  const [isFold, setIsFold] = useState(list.length >= 7);
+  const handleFold = useCallback(() => {
+    setIsFold(!isFold);
+  }, [isFold]);
   const addItem = useCallback(() => {
     onChange && onChange(0, {index});
   }, [onChange, index]);
@@ -44,11 +47,9 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
           prefixCls={prefixCls}
           value={name}
           onConfirm={onTextChange}
-          onDelete={delItem}
         />
       </div>
-      {
-        list.map((val, ind) => (
+      { !isFold && list.map((val, ind) => (
           <Item
             key={ind}
             prefixCls={prefixCls}
@@ -58,7 +59,11 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
           />
         ))
       }
-      <AddIcon prefixCls={prefixCls} onClick={addItem} />
+      <div className={`${prefixCls}-options`}>
+        <Icon type="up-circle" onClick={handleFold} className={`${prefixCls}-options-icon`} style={{transform: isFold && 'rotate(180deg)'}} />
+        <Icon type="plus-circle" onClick={addItem} className={`${prefixCls}-options-icon`} />
+        <Icon type="delete" onClick={delItem} className={`${prefixCls}-options-icon`} />
+      </div>
     </Card>
   )
 }
