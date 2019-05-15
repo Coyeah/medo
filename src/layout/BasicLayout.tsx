@@ -30,8 +30,8 @@ const BasicLayout = props => {
           <Footer />
         </footer>
         <Menu>
-          {config.map(value => (
-            <MenuItem key={value.path} icon={value.icon} path={value.path} />
+          {config.map(({path, icon, name}) => (
+            <MenuItem key={path} icon={icon} path={path} name={name} />
           ))}
         </Menu>
       </div>

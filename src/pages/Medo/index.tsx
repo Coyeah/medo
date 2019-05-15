@@ -8,6 +8,7 @@ import {queryListData, updateListData} from '@/services';
 import styles from './index.module.less';
 
 const {Add} = Notepad;
+const tags = ['分层级', '备忘录', '任务指标', '细化任务']
 
 class Medo extends React.Component {
   state = {
@@ -98,10 +99,10 @@ class Medo extends React.Component {
     return (
       <Card className={styles.empty}>
         <div className={styles.title}>思维导图式待办事项</div>
-        <Tag>分层级</Tag>
-        <Tag>备忘录</Tag>
-        <Tag>细化任务</Tag>
-        <div className={styles.tips}>点击添加待办事项 <Icon type="caret-down" /></div>
+        {tags.map((value, index) => (
+          <div key={index} className={styles.tag}>{value}</div>
+        ))}
+        <div className={styles.tips}>立刻开始记事之旅 <Icon type="caret-down" /></div>
       </Card>
     )
   }
@@ -119,7 +120,7 @@ class Medo extends React.Component {
             onChange={this.handleNotepadItem}
           />
         ))}
-        {this.emptyRender()}
+        {data.length === 0 && this.emptyRender()}
         <Add onClick={this.addNewItem} />
       </div>
     )

@@ -7,7 +7,11 @@ const prefixCls = 'medo-menu';
 
 const Menu: React.FC = (props: object): React.ReactElement => (
   <div className={`${prefixCls}-layout`}>
-    {props.children}
+    {React.Children.map(props.children, (child, key) =>
+      React.cloneElement(child, {
+        prefixCls,
+      })
+    )}
   </div>
 );
 

@@ -8,7 +8,7 @@ const router = [
     path: '/',
     component: dynamicWrapper(() => import('../pages/Medo'))
   }, {
-    name: '待办日历',
+    name: '计划日历',
     icon: 'calendar',
     path: '/cale',
     component: dynamicWrapper(() => import('../pages/Medo'))

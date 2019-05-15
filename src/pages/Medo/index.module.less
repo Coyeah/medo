@@ -16,5 +16,27 @@
       font-size: 14px;
       margin-top: 20px;
     }
+
+    .tag {
+      position: relative;
+      left: 0px;
+      top: 0px;
+      display: inline-block;
+      margin: 3px 8px;
+      padding: 3px 8px;
+      border-radius: 5px;
+      background-color: @primary-color;
+      color: @white;
+      cursor: pointer;
+      box-shadow: 3px 3px 3px @gray;
+      transition: 0.3s all;
+
+      &:hover {
+        position: relative;
+        left: -2px;
+        top: -2px;
+        box-shadow: 5px 5px 5px @gray;
+      }
+    }
   }
 }

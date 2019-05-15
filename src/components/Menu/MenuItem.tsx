@@ -1,13 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Button} from 'antd';
+import {Button, Popover} from 'antd';
 
-const menuItemStyle = {marginBottom: 15};
-
-const MenuItem: React.FC = (props: object): React.ReactElement => (
-  <Link to={props.path}>
-    <Button type='primary' style={menuItemStyle} icon={props.icon} block />
-  </Link>
+const MenuItem: React.FC = (props: object): React.ReactElement => {
+  const {prefixCls, name, path, icon} = props
+  return (
+    <div className={`${prefixCls}-item`}>
+      <Popover placement="right" content={<b>{name}</b>}>
+        <Link to={path}>
+          <Button type='primary' icon={icon} block />
+        </Link>
+      </Popover>
+    </div>
 )
+}
 
 export default MenuItem;
