@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import {Card, Icon, Tag} from 'antd';
 import _ from 'lodash';
 import moment from 'moment';
-import identity from '@/decorators/identity';
 import Notepad from '@/components/Notepad';
 import {generateUUID} from '@/utils/';
 import {queryListData, updateListData} from '@/services';
@@ -10,7 +9,6 @@ import styles from './index.module.less';
 
 const {Add} = Notepad;
 
-// @identity('medo-user')
 class Medo extends React.Component {
   state = {
     targetIndex: -1,
@@ -96,6 +94,18 @@ class Medo extends React.Component {
     this.handleNotepadItem(0, {});
   }
 
+  emptyRender = () => {
+    return (
+      <Card className={styles.empty}>
+        <div className={styles.title}>思维导图式待办事项</div>
+        <Tag>分层级</Tag>
+        <Tag>备忘录</Tag>
+        <Tag>细化任务</Tag>
+        <div className={styles.tips}>点击添加待办事项 <Icon type="caret-down" /></div>
+      </Card>
+    )
+  }
+
   render() {
     const {data} = this.state;
     return (
@@ -109,6 +119,7 @@ class Medo extends React.Component {
             onChange={this.handleNotepadItem}
           />
         ))}
+        {this.emptyRender()}
         <Add onClick={this.addNewItem} />
       </div>
     )

@@ -12,7 +12,7 @@ import './index.less';
 const App = props => {
   return (
     <HashRouter>
-      <BasicLayout >
+      <BasicLayout config={routerConfig}>
         <Suspense fallback={<div>Loading...</div>}>
           {routerConfig.map(value => (
             <Route exact key={value.path} path={value.path} component={value.component} />
