@@ -17,6 +17,7 @@ const BasicLayout = props => {
       setPaddingBottom(footerRef.current.offsetHeight);
     }
   });
+  const location = window.location.hash;
   return (
     <>
       <div className={styles.basicLayout} style={{paddingBottom}}>
@@ -31,7 +32,7 @@ const BasicLayout = props => {
         </footer>
         <Menu>
           {config.map(({path, icon, name}) => (
-            <MenuItem key={path} icon={icon} path={path} name={name} />
+            <MenuItem key={path} icon={icon} path={path} name={name} focus={location.replace('#', '') === path} />
           ))}
         </Menu>
       </div>

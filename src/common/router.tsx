@@ -11,7 +11,7 @@ const router = [
     name: '计划日历',
     icon: 'calendar',
     path: '/cale',
-    component: dynamicWrapper(() => import('../pages/Medo'))
+    component: dynamicWrapper(() => import('../components/Loading'))
   }
 ]
 
