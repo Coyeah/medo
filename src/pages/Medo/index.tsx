@@ -47,7 +47,7 @@ class Medo extends React.Component {
     this.setState({set, map});
   }
   /**
-   * flag: 0 - add; 1 - change; 2 - delete;
+   * flag: 0 - add; 1 - change; 2 - delete; 3 - change remarks;
    * map: {'index': 'father-location', 'childrenIndex': 'children-location'}
    */
   handleNotepadItem = (flag, {index, childrenIndex, target}) => {
@@ -84,8 +84,10 @@ class Medo extends React.Component {
           data.splice(index, 1);
         }
         break;
+      case 3:
+        data[index].children[childrenIndex].remarks = target;
+        break;
     }
-    console.log(data);
     this.setState({data}, () => {
       this.setData(data);
     })

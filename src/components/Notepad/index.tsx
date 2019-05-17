@@ -3,9 +3,11 @@ import React, {
 } from 'react';
 import {Card, Icon} from 'antd';
 import classnames from 'classnames';
+import Dialog from '@/components/Dialog';
 import TextEdit from './WrappedTextEdit';
 import AddIcon from './AddIcon';
 import Item from './Item';
+import Remarks from './Remarks';
 import './index.less';
 
 const prefixCls = 'medo-item-box',
@@ -22,6 +24,7 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
     setIsFold(!isFold);
   }, [isFold]);
   const addItem = useCallback(() => {
+    setIsFold(false);
     onChange && onChange(0, {index});
   }, [onChange, index]);
   const delItem = useCallback(() => {
@@ -35,6 +38,24 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
   }, [onChange, index]);
   const onItemDelete = useCallback((childrenIndex) => {
     onChange && onChange(2, {index, childrenIndex});
+  }, [onChange, index]);
+  const onRemarksChange = useCallback((childrenIndex) => {
+    if (!onChange) return;
+    const remarksProps = {
+      list: list[childrenIndex].remarks,
+      onClick: newList => {
+        onChange(3, {index, childrenIndex, target: newList})
+      }
+    }
+    Dialog.open({
+      titleRender: () => (<div><Icon type="appstore" /> 任务备注</div>),
+      transition: true,
+      content: (
+        <Remarks {...remarksProps} />
+      ),
+      maskClosable: true,
+      footerRender: () => null
+    })
   }, [onChange, index]);
   return (
     <Card hoverable bodyStyle={cardBodyStyle}>
@@ -55,6 +76,7 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
             prefixCls={prefixCls}
             item={val}
             onTextChange={value => onItemTextChange(value, ind)}
+            onRemarksChange={() => onRemarksChange(ind)}
             onItemDelete={() => onItemDelete(ind)}
           />
         ))

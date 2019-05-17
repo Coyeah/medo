@@ -57,7 +57,7 @@ class TextEdit extends React.PureComponent {
 
   contentRender = () => {
     const {
-      props: {type, bold, children},
+      props: {type, bold, children, placeholder},
       state: {isEdit, current},
       onEditChange, onValueChange, setContentRef
     } = this;
@@ -74,7 +74,13 @@ class TextEdit extends React.PureComponent {
     } else {
       return (
         <div ref={setContentRef} className={`${prefixCls}-content`}>
-          <span className={classnames({[`${prefixCls}-bold`]: bold})}>{current}</span>
+          {
+            current ? (
+              <span className={classnames({[`${prefixCls}-bold`]: bold})}>{current}</span>
+            ) : (
+              <span className={classnames(`${prefixCls}-placeholder`)}>{placeholder || `请编辑文本内容`}</span>
+            )
+          }
           <Icon onClick={onEditChange} className={`${prefixCls}-options`} type="edit" />
           {React.Children.map(children, (child, key) =>
             React.cloneElement(child, {
