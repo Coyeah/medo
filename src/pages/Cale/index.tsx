@@ -48,6 +48,7 @@ class Cale extends Component {
 
   onInputEnter = () => {
     const {data, date, value} = this.state;
+    if (value === '') return;
     if (data[date]) {
       data[date] = [value, ...data[date]];
     } else {
