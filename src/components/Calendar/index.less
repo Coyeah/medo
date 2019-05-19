@@ -1,0 +1,35 @@
+@prefixCls: medo-calendar;
+
+.@{prefixCls} {
+  &-layout {
+
+  }
+
+  &-item {
+    display: inline-block;
+    width: 14.2857%;
+    height: 100px;
+    padding: 8px;
+    border-radius: 3px;
+    transition: 0.2s all;
+    overflow: hidden;
+
+    &:hover {
+      box-shadow: 2px 2px 5px @gray;
+    }
+
+    &-panel {
+      margin-top: 3px;
+      height: 60px;
+      overflow: hidden;
+
+      &>div {
+        line-height: 20px;
+      }
+    }
+  }
+
+  &-focus {
+    box-shadow: 2px 2px 5px @gray;
+  }
+}

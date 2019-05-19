@@ -8,6 +8,7 @@ import {render} from 'react-dom';
 import BasicLayout from './layout/BasicLayout';
 import routerConfig from './common/router';
 import Loading from '@/components/Loading';
+import identity from '@/decorators/identity';
 import './index.less';
 
 const spinStyle = {
@@ -15,11 +16,11 @@ const spinStyle = {
   marginTop: '10%',
   width: '50%',
   padding: 50,
-  borderRadius: 20,
-  backgroundColor: 'rgba(255,255,255,0.5)'
+  borderRadius: 10,
+  backgroundColor: 'rgba(255,255,255,0.7)'
 };
 
-const App = props => {
+const App = identity('medo-user')(props => {
   const wrappedSpin = (
     <div style={spinStyle}>
       <Loading />
@@ -36,7 +37,7 @@ const App = props => {
       </BasicLayout>
     </HashRouter>
   )
-}
+});
 
 render(
   <App />,

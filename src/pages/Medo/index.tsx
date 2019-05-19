@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Component} from 'react';
 import {Card, Icon, Tag} from 'antd';
 import _ from 'lodash';
 import moment from 'moment';
@@ -7,10 +7,10 @@ import {generateUUID} from '@/utils/';
 import {queryListData, updateListData} from '@/services';
 import styles from './index.module.less';
 
-const {Add} = Notepad;
 const tags = ['分层级', '备忘录', '任务指标', '细化任务']
+const {Add} = Notepad;
 
-class Medo extends React.Component {
+class Medo extends Component {
   state = {
     targetIndex: -1,
     data: [],
