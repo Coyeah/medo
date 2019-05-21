@@ -6,7 +6,7 @@ import {Input, Icon, Divider} from 'antd';
 const Remarks: React.FC = (props: object): React.ReactElement => {
   const {onClick: propsOnClick, list: propsList} = props;
   const [inputValue, setInputValue] = useState('');
-  const [list, setList] = useState(propsList);
+  const [list, setList] = useState(propsList || []);
   const keyDownHandler = e => {
     if (e.keyCode === 13) onClick(list);
   }
