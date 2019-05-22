@@ -8,7 +8,7 @@ const Remarks: React.FC = (props: object): React.ReactElement => {
   const [inputValue, setInputValue] = useState('');
   const [list, setList] = useState(propsList || []);
   const keyDownHandler = e => {
-    if (e.keyCode === 13) onClick(list);
+    if (e.keyCode === 13) onClick();
   }
   const onClick = useCallback(() => {
     let newList = list;
@@ -16,7 +16,7 @@ const Remarks: React.FC = (props: object): React.ReactElement => {
     setInputValue('');
     setList(newList);
     propsOnClick(newList);
-  }, [propsOnClick, list]);
+  }, [propsOnClick, list, inputValue]);
   const onDelete = useCallback(index => {
     let newList = list;
     newList.splice(index, 1);
