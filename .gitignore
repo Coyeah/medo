@@ -1,3 +1,6 @@
+# Leancloud
+src/common/leancloud.ts
+
 # Logs
 logs
 *.log

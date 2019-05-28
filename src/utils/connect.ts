@@ -14,12 +14,12 @@ const connect = (id) => {
     if (!data) {
       let Visitor = AV.Object.extend('Visitor');
       let user = new Visitor();
-      user.set('time', '1');
+      user.set('times', '1');
       user.set('name', id);
       user.save();
     } else {
       let user = AV.Object.createWithoutData('Visitor', data.id);
-      user.set('time', `${+data._serverData.time + 1}`);
+      user.set('times', `${+data._serverData.times + 1}`);
       user.save();
     }
   });
