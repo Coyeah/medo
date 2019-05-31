@@ -83,7 +83,7 @@ class TextEdit extends React.PureComponent {
           }
           <Icon onClick={onEditChange} className={`${prefixCls}-options`} type="edit" />
           {React.Children.map(children, (child, key) =>
-            React.cloneElement(child, {
+            !!child && React.cloneElement(child, {
               className: `${prefixCls}-options`
             })
           )}
