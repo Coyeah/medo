@@ -8,6 +8,7 @@ import TextEdit from './WrappedTextEdit';
 import AddIcon from './AddIcon';
 import Item from './Item';
 import Remarks from './Remarks';
+import DelIcon from './DelIcon';
 import './index.less';
 
 const prefixCls = 'medo-item-box',
@@ -84,7 +85,7 @@ const Notepad: React.FC = (props: object): React.ReactElement => {
       <div className={`${prefixCls}-options`}>
         <Icon type="up-circle" onClick={handleFold} className={`${prefixCls}-options-icon`} style={{transform: isFold && 'rotate(180deg)'}} />
         <Icon type="plus-circle" onClick={addItem} className={`${prefixCls}-options-icon`} />
-        <Icon type="delete" onClick={delItem} className={`${prefixCls}-options-icon`} />
+        <DelIcon onDelete={delItem} className={`${prefixCls}-options-icon`} />
       </div>
     </Card>
   )

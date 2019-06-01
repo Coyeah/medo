@@ -1,7 +1,8 @@
 import React, {useCallback} from 'react';
-import {Icon, message} from 'antd';
+import {Icon, Popconfirm, message} from 'antd';
 import TextEdit from '@/components/TextEdit';
 import Copycat from '@/components/Copycat';
+import DelIcon from './DelIcon';
 
 const WrappedTextEdit: React.FC = (props: object): React.ReactElement => {
   const {onDelete, prefixCls, value, ...restProps} = props;
@@ -12,7 +13,7 @@ const WrappedTextEdit: React.FC = (props: object): React.ReactElement => {
     <div className={`${prefixCls}-input`}>
       <TextEdit value={value} {...restProps}>
         {onDelete && (
-          <Icon type="delete" onClick={onDelete} />
+          <DelIcon onDelete={onDelete} />
         )}
         <Copycat value={value} onClick={onCopyClick} />
       </TextEdit>
