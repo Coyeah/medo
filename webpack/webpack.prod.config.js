@@ -16,8 +16,8 @@ module.exports = merge(common, {
   devtool: 'source-map',
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[id].[contenthash].css',
+      filename: 'css/[name].[contenthash].medo.css',
+      chunkFilename: 'css/[id].[contenthash].medo.css',
     }),
     new CleanWebpackPlugin([paths.appDist], {
       root: paths.appRoot, // 绝对路径，就是要根据这个 root 去找要删除的文件夹，默认是这个 webpack 配置文件所在额

@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     path: paths.appDll,
-    filename: '[name].dll.js',
+    filename: '[name].medo.dll.js',
     library: '_dll_[name]_library',
   },
   plugins: [
@@ -17,7 +17,7 @@ module.exports = {
       context: paths.appRoot,
       name: '_dll_[name]_library',
       // manifest.json 描述动态链接库包含了哪些内容
-      path: path.resolve(paths.appDll, '[name].manifest.json')
+      path: path.resolve(paths.appDll, '[name].medo.manifest.json')
     }),
   ],
 }

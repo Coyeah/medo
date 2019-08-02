@@ -30,8 +30,8 @@ module.exports = {
   output: {
     publicPath: paths.PUBLIC_PATH,
     path: paths.appDist,
-    filename: '[name].[hash:8].js',
-    chunkFilename: '[name].[hash:8].js',
+    filename: '[name].[hash:8].medo.js',
+    chunkFilename: '[name].[hash:8].medo.js',
   },
   resolve: {
     alias: {
@@ -147,7 +147,7 @@ module.exports = {
           use: [{
             loader: 'file-loader',
             options: {
-              name: 'other/[name].[hash:8].[ext]',
+              name: 'other/[name].[hash:8].medo.[ext]',
             },
           }], // 其他文件
         }
@@ -176,8 +176,8 @@ module.exports = {
     USE_DLL &&
       new HtmlWebpackIncludeAssetsPlugin({
         assets: [
-          'react.dll.js',
-          'reactDOM.dll.js',
+          'react.medo.dll.js',
+          'reactDOM.medo.dll.js',
         ],
         append: false,
       }),

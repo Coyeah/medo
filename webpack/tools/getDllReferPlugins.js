@@ -11,7 +11,7 @@ const getDllReferPlugins = entries => {
   }
   return names.map(name =>
     new webpack.DllReferencePlugin({
-      manifest: path.resolve(paths.appDll, `${name}.manifest.json`),
+      manifest: path.resolve(paths.appDll, `${name}.medo.manifest.json`),
     })
   )
 };
