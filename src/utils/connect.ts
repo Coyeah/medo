@@ -1,4 +1,9 @@
-import {leancloud} from '../common/config';
+// import {leancloud} from '../common/config';
+
+const leancloud = {
+  appId: 'your app id',
+  appKey: 'your app key'
+};ß
 
 const connect = (id) => {
   AV.init(leancloud.appId, leancloud.appKey);

@@ -19,4 +19,4 @@ export const location = [
 ];
 
 // {appId: string, appKey: string}
-export {leancloud} from './leancloud';
+// export {leancloud} from './leancloßud';

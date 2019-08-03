@@ -1,5 +1,10 @@
 # Medo - A memo for Todo
 
+```
+$ npm i
+$ npm start
+```
+
 Medo 是一个分层级的计划列表备忘录工具，记录下来，提高工作效率，细化任务。
 
 一个在入门 React 的时候练手的项目—— Todo List。再再再再再再再再再再再再再再再一次重写。

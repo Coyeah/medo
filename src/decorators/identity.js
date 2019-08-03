@@ -1,5 +1,5 @@
 import {storage, generateUUID} from '../utils';
-import connect from '../utils/connect';
+// import connect from '../utils/connect';
 
 const identity = (key) => {
   let id = storage(key);
@@ -7,7 +7,7 @@ const identity = (key) => {
     id = generateUUID();
     storage(key, id);
   }
-  connect(id);
+  // connect(id);
   return WrappedComponent => WrappedComponent;
 }
 
