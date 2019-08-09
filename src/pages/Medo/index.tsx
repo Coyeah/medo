@@ -52,7 +52,7 @@ class Medo extends Component {
    */
   handleNotepadItem = (flag, {index, childrenIndex, target}) => {
     const {data} = this.state;
-    console.log(flag, index, childrenIndex, target);
+    // console.log(flag, index, childrenIndex, target);
     switch (flag) {
       case 0:
         if (typeof index !== 'undefined') {
